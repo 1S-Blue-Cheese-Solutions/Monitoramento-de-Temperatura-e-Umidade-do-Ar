@@ -17,18 +17,6 @@ flowchart LR
     C --> D[💻 Site Institucional]
 ```
 
-
-## 👥 Equipe
-
-| Nome | E-mail |
-|---|---|
-| Gregory Casarini | gregory.casarini@sptech.school |
-| Guilherme Rosa | guilherme.rosa@sptech.school |
-| Igor Pereira | igor.pereira@sptech.school |
-| Kauã Aguas | kaua.aguas@sptech.school |
-| Luann Mariano | luann.mariano@sptech.school |
-| Matheus Santos | matheus.dsantos@sptech.school |
-
 ## 🔗 Links
 
 | Documento | Endereço |
@@ -40,6 +28,16 @@ flowchart LR
 | Slide | [Canva](https://canva.link/xmequv2bsg04uer) |
 | Arduino | [Tinkercad](https://www.tinkercad.com/things/bXdLR7ZahWf-1s-blue-cheese-solutions?sharecode=7Iuf28ZjUgrUizOj0Ka3jAzG1GE3slGxypQFNji5TE4) |
 
+## 👥 Equipe
+
+| Nome | E-mail |
+|---|---|
+| Gregory Casarini | gregory.casarini@sptech.school |
+| Guilherme Rosa | guilherme.rosa@sptech.school |
+| Igor Pereira | igor.pereira@sptech.school |
+| Kauã Aguas | kaua.aguas@sptech.school |
+| Luann Mariano | luann.mariano@sptech.school |
+| Matheus Santos | matheus.dsantos@sptech.school |
 
 <div align="center">
 
