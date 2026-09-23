@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="estilos/style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="estilos/media-query.css">
     <title>Login</title>
 </head>
 <body>
     <main>
+        <header>
+            <img src="favicon.png" alt="">
+        </header>
         <section id="login">
             <div id="img">
-                <!-- imagem no css -->
+                <img src="favicon.png" alt="">
             </div>
             <div id="form">
                 <h1>login</h1>
                 <p>Seja bem vindo novamente, faça login para acessar sua conta!</p>
-                <form action="login.php" method="post" autocomplete="on">
+                <form autocomplete="on">
                     <div class="campo">
                         <span class="material-symbols-outlined">person</span>
                         <input type="email" name="mail" id="imail" placeholder="seu email" autocomplete="email" required maxlength="30">
@@ -28,8 +32,8 @@
                         <input type="password" name="senha" id="isenha" placeholder="sua senha" autocomplete="current-password" required minlength="8" maxlength="20">
                         <label for="isenha"></label>
                     </div>
-                    <input type="submit" value="Entrar">
-                    <a href="esqueci.html" class="botao">Esqueci a senha <span class="material-symbols-outlined">mail</span></a>
+                    <button onclick="entrar()">Entrar</button>
+                    <button onclick="recuperar()" id="recuperar">Esqueci a senha <span class="material-symbols-outlined">mail</span></button>
                 </form>
             </div>
         </section>

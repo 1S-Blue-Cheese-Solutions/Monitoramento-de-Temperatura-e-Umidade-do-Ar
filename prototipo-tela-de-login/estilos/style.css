@@ -11,12 +11,31 @@ body, html {
     background-color: rgb(36, 48, 88);
     height: 100vh;
     width: 100vw;
+    display: flex
 }
 
 main {
     position: relative;
     height: 100vh;
     width: 100vw;
+}
+
+header {
+    position: absolute;
+    padding: 10px;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(36, 48, 88);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+header > img {
+    width: 60px;
+    height: 40px;
 }
 
 section#login {
@@ -36,10 +55,17 @@ section#login {
 }
 
 section#login > div#img {
-    display: block;
-    background: rgb(36, 48, 88) url(../imagens/imagem.jpg) no-repeat left bottom;
+    display: flex;
+    background: rgb(36, 48, 88) no-repeat left bottom;
     background-size: cover;
     height: 200px;
+    justify-content: center;
+}
+
+div#img > img {
+    width: 100px;
+    height: 60px;
+    margin-top: 10px;
 }
 
 section#login > div#form {
@@ -56,12 +82,17 @@ div#form > p {
     font-size: 0.8em;
 }
 
+div.campo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 form > div.campo {
-    margin: 5px 0px;
+
+    margin: 30px 0px;
     padding: 1px;
     height: 40px;
-    background-color: rgb(161, 81, 235);
-    border: 2px solid rgb(161, 81, 235);
     border-radius: 10px;
     text-align: left;
 }
@@ -69,16 +100,16 @@ form > div.campo {
 div.campo > span {
     font-size: 2em;
     width: 40px;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 5px;
 }
 
 div.campo > input {
     background-color: rgba(175, 184, 212, 0.8);
     font-size: 1em;
-    width: calc(100% - 45px);  
+    width: 300px;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 20px;
     border: none;
     padding: 4px;
     transform: translateY(-14px);
@@ -88,8 +119,8 @@ div.campo > input:focus-within {
     background-color: rgb(255, 255, 255);
 }
 
-form > input[type=submit] {
-    display: block;
+form > button {
+    display: flex;
     font-size: 1em;
     width: 100%;
     height: 35px;
@@ -98,13 +129,14 @@ form > input[type=submit] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
 }
 
-form > input[type=submit]:hover {
+form > button:hover {
     background-color: rgb(36, 48, 88, 0.8);
 }
 
-form > a.botao {
+form > button.recuperar {
     display: block;
     text-align: center;
     font-size: 1em;
@@ -113,19 +145,19 @@ form > a.botao {
     padding-top: 7px;
     margin-top: 2px;
     background-color: rgb(255, 255, 255);
-    color: rgb(19, 57, 82);
+    color: rgb(227, 228, 230);
     text-decoration: none;
     border: 1px solid rgb(24, 38, 85);
     border-radius: 5px;
     cursor: pointer;
 }
 
-form > a.botao > span.material-symbols-outlined {
+form > button.recuperar > span.material-symbols-outlined {
     font-size: 1em;
     color: rgb(19, 57, 82);
     margin: 0px;
 }
 
-form > a.botao:hover {
+form > button.recuperar:hover {
     background-color: rgb(116, 136, 202);
 }
