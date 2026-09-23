@@ -21,6 +21,7 @@ flowchart LR
 
 | Documento | Link |
 |---|---|
+| Backlog e Tarefas | [Jira](https://igor-fuchs-pereira.atlassian.net/jira/software/projects/BCS) 
 | Backlog | [Excel](https://bandteccom-my.sharepoint.com/:x:/g/personal/igor_pereira_sptech_school/IQAb65aOH4v8Q4hLM59xKGtrAftC41Jy3egA0QqcJipNpJA?e=ZaaaNB) |
 | Documentação | [Word](https://bandteccom-my.sharepoint.com/:w:/g/personal/igor_pereira_sptech_school/IQCqt9FMeYdbRJukiGQAj8gjAfKs-cL8G7m08feIw0PGads?e=Yv3O12) |
 | Site Institucional | [Figma](https://www.figma.com/design/x1H7kIV6jTcIsrpbcfmXkY/Prot%C3%B3tipo-Site-Institucional?t=VjGqwV4s5uzStGkh-1) |
