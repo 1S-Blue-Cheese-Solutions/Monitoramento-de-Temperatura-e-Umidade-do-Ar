@@ -3,7 +3,7 @@
 @media (min-width: 768px) and (max-width: 992px) {
 
     body {
-        background-image: url(../imagens/pexels-shvetsa-5953727.jpg);
+        background-image: url(../imagens/fundoBC.png);
         background-size: cover;
     }
 
@@ -21,7 +21,7 @@
     section#login > div#form {
         float: right;
         width: 70%;
-        height: 500px;
+        height: 400px;
     }
 
     div#form > p {

@@ -8,11 +8,9 @@
 }
 
 body, html {
-    body {
-        background-image: url(../imagens/pexels-shvetsa-5953727.jpg);
+        background-image: url(../imagens/fundoBC.png);
         background-size: cover;
-    }
-    display: flex
+    
 }
 
 main {
@@ -58,7 +56,7 @@ nav > a {
 section#login {
     background-color: rgb(99, 130, 233);
     width: 260px;
-    min-height: 400px;
+    min-height: 500px;
     margin-top: 40px;
     border-radius: 60px;
     overflow: hidden;
