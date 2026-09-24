@@ -16,42 +16,68 @@ body, html {
 main {
     position: relative;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
+
 }
 
 header {
-            margin: 0px 0px 0px;
-            padding: 1px 1px 1px;
+            display: flex;
+            padding: 10px;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.466);
             background-color:#FFF8DD;
         }
 
 header > img {
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 80px;
-    height: 60px;
+    margin: 5px;
+    width: 140px;
+    height: 100px;
 }
 
 nav {
-    padding: 5px;
+    padding: 10px;
     width: 100%;
     display: flex;
+    gap: 20px;
+    flex-direction: row-reverse;
+    align-items: center;
 }
 
 nav > a {
-        border-radius: 5px;
+        border-radius: 30px;
         padding: 10px;
+        margin: 10px;
         text-decoration: none;
         color: rgb(36, 48, 88);
+        font-size: 20px;
         font-weight: bold;
         transition-duration: 0.5s;
 }
 
-        nav > a:hover {
-            background-color: rgb(36, 48, 88);
-            color: #FFF8DD;
-        }
+nav >a#monitoramento {
+    text-align: center;
+    font-size: 1.2em;
+    width: 250px;
+    height: 50px;
+    
+    background-color: rgb(36, 48, 88);
+    color: rgb(243, 243, 245);
+    text-decoration: none;
+    border: 1px solid rgb(24, 38, 85);
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+
+nav >a#monitoramento:hover {
+    background-color: rgb(248, 248, 250);
+    color: rgb(36, 48, 88);
+    border-color: rgb(24, 38, 85);
+}
+
+nav > a:hover {
+        background-color: rgb(36, 48, 88);
+        color: #ffffff;
+}
 
 section#login {
     background-color: rgb(99, 130, 233);
