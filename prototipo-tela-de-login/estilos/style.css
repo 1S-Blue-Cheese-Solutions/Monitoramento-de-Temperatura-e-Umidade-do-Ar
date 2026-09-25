@@ -232,4 +232,23 @@ form > button.recuperar > span.material-symbols-outlined {
 form > button.recuperar:hover {
     background-color: rgb(116, 136, 202);
 }
- 
+
+
+form > span#registro {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #1b2a49;
+    text-align: center;
+    margin-top: 10px;
+}
+
+form > span#registro > a {
+    text-decoration: none;
+    color: rgb(36, 48, 88);
+    font-weight: bold;
+}
+
+form > span#registro > a:hover {
+    color: rgb(19, 57, 82);
+    text-decoration: underline; 
+}
