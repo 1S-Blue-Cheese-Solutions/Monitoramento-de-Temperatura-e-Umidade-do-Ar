@@ -1,4 +1,6 @@
 use pi;
+CREATE USER 'insert'@'localhost' IDENTIFIED BY 'senha';
+GRANT INSERT ON medida.* TO 'insert'@'localhost';
 -- Script de criação das tabelas
 
 create table medida (
