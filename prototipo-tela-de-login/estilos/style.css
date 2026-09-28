@@ -185,6 +185,16 @@ div.campo > input:focus-within {
     background-color: rgb(255, 255, 255);
 }
 
+div#div_resultMail {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+div#div_resultSenha {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 form > button {
     display: flex;
     justify-content: center;
