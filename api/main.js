@@ -13,16 +13,16 @@ const HABILITAR_OPERACAO_INSERIR = false;
 // função para comunicação serial
 const serial = async (
     valoresSensorAnalogicoUmidade,
-    valoressensorAnalogicoTemp,
+    valoresSensorTemp,
 ) => {
 
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: 'HOST_DO_BANCO',
-            user: 'USUARIO_DO_BANCO',
-            password: 'SENHA_DO_BANCO',
-            database: 'DATABASE_DO_BANCO',
+            host: 'localhost',
+            user: 'insert',
+            password: 'urubu100',
+            database: 'dataBC',
             port: 3306
         }
     ).promise();
@@ -51,19 +51,19 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorAnalogicoTemp = parseInt(valores[0]);
+        const sensorAnalogicoTemp = parseFloat(valores[0]);
         const sensorAnalogicoUmidade = parseFloat(valores[1]);
 
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorAnalogicoUmidade.push(sensorAnalogicoUmidade);
-        valoressensorAnalogicoTemp.push(sensorAnalogicoTemp);
+        valoresSensorTemp.push(sensorAnalogicoTemp);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+                'INSERT INTO medida (sensorUmidade, sensorTemperatura) VALUES (?, ?)',
                 [sensorAnalogicoUmidade, sensorAnalogicoTemp]
             );
             console.log("valores inseridos no banco: ", sensorAnalogicoUmidade + ", " + sensorAnalogicoTemp);
@@ -81,7 +81,7 @@ const serial = async (
 // função para criar e configurar o servidor web
 const servidor = (
     valoresSensorAnalogicoUmidade,
-    valoressensorAnalogicoTemp
+    valoresSensorTemp
 ) => {
     const app = express();
 
@@ -98,11 +98,11 @@ const servidor = (
     });
 
     // define os endpoints da API para cada tipo de sensor
-    app.get('/sensores/analogicoUmidade', (_, response) => {
+    app.get('/sensores/umidade', (_, response) => {
         return response.json(valoresSensorAnalogicoUmidade);
     });
-    app.get('/sensores/analogicoTemp', (_, response) => {
-        return response.json(valoressensorAnalogicoTemp);
+    app.get('/sensores/temperatura', (_, response) => {
+        return response.json(valoresSensorTemp);
     });
 }
 
@@ -110,17 +110,17 @@ const servidor = (
 (async () => {
     // arrays para armazenar os valores dos sensores
     const valoresSensorAnalogicoUmidade = [];
-    const valoressensorAnalogicoTemp = [];
+    const valoresSensorTemp = [];
 
     // inicia a comunicação serial
     await serial(
         valoresSensorAnalogicoUmidade,
-        valoressensorAnalogicoTemp
+        valoresSensorTemp
     );
 
     // inicia o servidor web
     servidor(
         valoresSensorAnalogicoUmidade,
-        valoressensorAnalogicoTemp
+        valoresSensorTemp
     );
 })();
