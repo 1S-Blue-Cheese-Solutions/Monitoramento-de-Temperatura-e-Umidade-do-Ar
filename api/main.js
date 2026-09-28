@@ -12,7 +12,7 @@ const HABILITAR_OPERACAO_INSERIR = false;
 
 // função para comunicação serial
 const serial = async (
-    valoresSensorAnalogicoUmidade,
+    valoresSensorUmidade,
     valoresSensorTemp,
 ) => {
 
@@ -51,11 +51,11 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorAnalogicoTemp = parseFloat(valores[0]);
-        const sensorAnalogicoUmidade = parseFloat(valores[1]);
+        const sensorAnalogicoTemp = parseFloat(valores[1]);
+        const sensorAnalogicoUmidade = parseFloat(valores[0]);
 
         // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorAnalogicoUmidade.push(sensorAnalogicoUmidade);
+        valoresSensorUmidade.push(sensorAnalogicoUmidade);
         valoresSensorTemp.push(sensorAnalogicoTemp);
 
         // insere os dados no banco de dados (se habilitado)
@@ -80,7 +80,7 @@ const serial = async (
 
 // função para criar e configurar o servidor web
 const servidor = (
-    valoresSensorAnalogicoUmidade,
+    valoresSensorUmidade,
     valoresSensorTemp
 ) => {
     const app = express();
@@ -99,7 +99,7 @@ const servidor = (
 
     // define os endpoints da API para cada tipo de sensor
     app.get('/sensores/umidade', (_, response) => {
-        return response.json(valoresSensorAnalogicoUmidade);
+        return response.json(valoresSensorUmidade);
     });
     app.get('/sensores/temperatura', (_, response) => {
         return response.json(valoresSensorTemp);
@@ -109,18 +109,18 @@ const servidor = (
 // função principal assíncrona para iniciar a comunicação serial e o servidor web
 (async () => {
     // arrays para armazenar os valores dos sensores
-    const valoresSensorAnalogicoUmidade = [];
+    const valoresSensorUmidade = [];
     const valoresSensorTemp = [];
 
     // inicia a comunicação serial
     await serial(
-        valoresSensorAnalogicoUmidade,
+        valoresSensorUmidade,
         valoresSensorTemp
     );
 
     // inicia o servidor web
     servidor(
-        valoresSensorAnalogicoUmidade,
+        valoresSensorUmidade,
         valoresSensorTemp
     );
 })();
