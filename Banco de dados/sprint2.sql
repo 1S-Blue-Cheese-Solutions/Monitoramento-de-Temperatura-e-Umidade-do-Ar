@@ -1,6 +1,12 @@
 use pi;
-
 -- Script de criação das tabelas
+
+create table medida (
+idSensor int primary key auto_increment,
+sensorTemperatura float,
+sensorUmidade float
+);
+
 create table usuario (
 id int primary key auto_increment,
 nome varchar (60) not null,

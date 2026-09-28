@@ -22,7 +22,7 @@ const serial = async (
             host: 'localhost',
             user: 'insert',
             password: 'urubu100',
-            database: 'dataBC',
+            database: 'pi',
             port: 3306
         }
     ).promise();
