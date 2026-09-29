@@ -33,14 +33,15 @@
                 <form autocomplete="on">
                     <div class="campo">
                         <span class="material-symbols-outlined">person</span>
-                        <input type="email" name="mail" id="imail" placeholder="email:" autocomplete="email" required maxlength="30">
+                        <input type="email" name="mail" id="imail" placeholder="email:" autocomplete="email" required maxlength="30" oninput="email()">
                         <label for="ilogin"></label>
                     </div>
+                    <div id="div_resultMail"></div>
                     <div class="campo">                        
                         <span class="material-symbols-outlined">vpn_key</span>
-                        <input type="password" name="senha" id="isenha" placeholder="Senha:" autocomplete="current-password" required minlength="8" maxlength="20">
-                        <label for="isenha"></label>
+                        <input type="password" name="senha" id="isenha" placeholder="Senha:" autocomplete="current-password" required minlength="8" maxlength="20" oninput="mostrar()">
                     </div>
+                    <div id="div_resultSenha"></div>
                     <button onclick="entrar()" id="entrar">Entrar</button>
                     <button onclick="recuperar()" id="recuperar">Esqueci a senha <span class="material-symbols-outlined">mail</span></button>
                     <span id="registro">Ainda não tem uma conta? <a href="#">Cadastre-se</a></span>
@@ -51,4 +52,45 @@
     
 </body>
 </html>
-script
+<script>
+    function email() {
+        let email = imail.value;
+
+        if(email.includes('@')) {
+            div_resultMail.innerHTML=``
+        } else {
+            div_resultMail.innerHTML=`Email deve conter @`
+        }
+    }
+
+    function mostrar() {
+        let senha = isenha.value;
+        let tamanhoSenha = senha.length;
+        let temMaiuscula = senha !== senha.toUpperCase();
+        let temMinuscula = senha !== senha.toLowerCase();
+        
+        let criterios = 0;
+
+        if(tamanhoSenha >= 8){
+            criterios = criterios + 1;
+        } 
+
+        if(temMaiuscula) {
+            criterios = criterios + 1;
+            
+        }
+
+        if(temMinuscula) {
+            criterios = criterios + 1;
+            
+        }
+
+        if(criterios == 1){
+            div_resultSenha.innerHTML=`Senha Fraca`
+        }else if(criterios == 2) {
+            div_resultSenha.innerHTML=`Senha Média`
+        }else if(criterios == 3){
+            div_resultSenha.innerHTML=``
+        }
+    }
+</script>
