@@ -156,7 +156,7 @@ div.campo {
 
 form > div.campo {
 
-    margin: 10px 0px;
+    margin: 10px 0px 0px 2px;
     padding: 1px;
     height: 40px;
     border-radius: 10px;
@@ -186,12 +186,10 @@ div.campo > input:focus-within {
 }
 
 div#div_resultMail {
-    margin-top: -10px;
     margin-bottom: 10px;
 }
 
 div#div_resultSenha {
-    margin-top: -10px;
     margin-bottom: 10px;
 }
 
@@ -203,7 +201,7 @@ form > button {
     font-size: 1em;
     width: 50%;
     height: 37px;
-    margin-top: 10px;
+    margin-top: 5px;
     
     background-color: rgb(36, 48, 88);
     color: rgb(243, 243, 245);
