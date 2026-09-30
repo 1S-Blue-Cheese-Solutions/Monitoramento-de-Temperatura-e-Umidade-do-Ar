@@ -81,7 +81,7 @@ nav > a:hover {
 
 section#login {
     background-color: rgb(99, 130, 233);
-    width: 260px;
+    width: 990px;
     min-height: 500px;
     margin-top: 40px;
     border-radius: 60px;
@@ -95,6 +95,12 @@ section#login {
 
     transition: width 0.3s ease, height 0.3s ease;
 }
+
+    section#login > div#img {
+        float: left;
+        width: 30%;
+        height: 500px;
+    }
 
 section#login > div#img {
     display: flex;
