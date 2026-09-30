@@ -13,12 +13,16 @@
         <header>
             <img src="img/LogoBlueCheese.png" alt="">
             <nav>
-                <a href="#" id="monitoramento">Acessar monitoramento</a>                
-                <a href="#">Quem Somos</a>
-                <a href="#">Simulador Financeiro</a>
-                <a href="#">Problema</a>
-                <a href="#">Objetivo</a>
+                <!-- <a href="#" id="monitoramento">Acessar monitoramento →</a>                 -->
                 <a href="index.html"><b>Home</b></a>
+                <a href="#">Objetivo</a>
+                <a href="#">Problema</a>
+                <a href="#">Simulador Financeiro</a>
+                <a href="#">Quem Somos</a>
+                
+                
+                
+                
             </nav>
         </header>
         <section id="login">
@@ -55,10 +59,10 @@
     function email() {
         let email = imail.value;
 
-        if(email.includes('@')) {
+        if(email.includes('@') && email.includes('.com')) {
             div_resultMail.innerHTML=``
         } else {
-            div_resultMail.innerHTML=`Email deve conter @`
+            div_resultMail.innerHTML=`Email deve conter @ e .com`
         }
     }
 

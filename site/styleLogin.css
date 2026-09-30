@@ -36,29 +36,30 @@ header > img {
 
 nav {
     padding: 10px;
+    magin le
     width: 100%;
     display: flex;
     gap: 20px;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
 }
 
 nav > a {
+
         border-radius: 30px;
         padding: 10px;
         margin: 10px;
         text-decoration: none;
         color: rgb(36, 48, 88);
         font-size: 17px;
-        font-weight: bold;
         transition-duration: 0.5s;
 }
 
 nav >a#monitoramento {
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1em;
     width: 250px;
-    height: 50px;
+    height: 45px;
     
     background-color: rgb(36, 48, 88);
     color: rgb(243, 243, 245);
