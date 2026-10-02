@@ -513,3 +513,46 @@
       border-radius: 50%;
       background: #2ecc71;
     }
+.simulator-placeholder {
+    margin-top: 28px;
+    padding: 30px;
+    height: auto;
+    border-radius: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+}
+
+.simulator-placeholder h1 {
+    color: var(--navy);
+    font-family: Georgia, serif;
+}
+
+.simulator-placeholder input,
+.simulator-placeholder select {
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+    color: var(--text);
+}
+
+.simulator-placeholder button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    background: var(--navy);
+    color: white;
+    cursor: pointer;
+}
+
+.simulator-placeholder button:hover {
+    background: var(--navy-2);
+}
+
+.simulator-placeholder #div_resultado,
+.simulator-placeholder #div_exbCalc {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--surface-2);
+}
