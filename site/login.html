@@ -10,22 +10,25 @@
 </head>
 <body>
     <main>
-        <header>
-            <img src="img/LogoBlueCheese.png" alt="">
-            <nav>
-                <!-- <a href="#" id="monitoramento">Acessar monitoramento →</a>                 -->
-                <a href="index.html"><b>Home</b></a>
-                <a href="#">Objetivo</a>
-                <a href="#">Problema</a>
-                <a href="#">Simulador Financeiro</a>
-                <a href="#">Quem Somos</a>
-                
-                
-                
-                
+        <header class="site-header">
+            <div class="container nav">
+            <a href="#home" class="brand" aria-label="Blue Cheese - início">
+                <img src="./img/LogoBlueCheese.png" alt="Logo Blue Cheese">
+            </a>
+
+            <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+                <a href="#home">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#como-funciona">Como funciona</a>
+                <a href="#simulador">Simulador financeiro</a>
+                <a href="#quem-somos">Quem somos</a>
             </nav>
+
+            <a class="nav-cta" href="login.html">Monitoramento →</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+            </div>
         </header>
-        <section id="login">
+        <section class="login">
             <div id="img">
                 <img src="img/LogoBlueCheese.png" alt="Logo da empresa">
                 <h1>A sua empresa de dados te espera!</h1>
@@ -80,12 +83,10 @@
 
         if(temMaiuscula) {
             criterios = criterios + 1;
-            
         }
 
         if(temMinuscula) {
             criterios = criterios + 1;
-            
         }
 
         if(criterios == 1){

@@ -81,7 +81,7 @@ nav > a:hover {
         color: #ffffff;
 }
 
-section#login {
+.login {
     background-color: rgb(99, 130, 233);
     width: 990px;
     min-height: 500px;
