@@ -193,6 +193,17 @@
             flagError = true;
         }
 
+        let contador = 0;
+        let contSimbolos = 0;
+        let simbolos = '!@#$%&*()_+-=[]{};:,.<>?/|~';
+
+        while (contador < senha.length) {
+            if (simbolos.includes(senha[contador])) {
+                contSimbolos++;
+            }
+            contador++;
+        }
+
         if(flagError){
             return
         }
