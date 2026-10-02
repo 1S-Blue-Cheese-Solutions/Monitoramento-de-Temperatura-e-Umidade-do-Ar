@@ -577,7 +577,17 @@
       background-color: rgba(110, 118, 130, 0.6);
     }
 
+    .login-fechar {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+    }
+
     .login-card {
+      position: relative;
       display: flex;
       width: 960px;
       height: 580px;
