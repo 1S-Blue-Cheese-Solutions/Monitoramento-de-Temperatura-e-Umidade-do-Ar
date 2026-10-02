@@ -167,6 +167,7 @@
         let tamanhoSenha = senha.length;
         let temMaiuscula = senha !== senha.toUpperCase();
         let temMinuscula = senha !== senha.toLowerCase();
+        
 
         if(temMaiuscula && temMinuscula && tamanhoSenha >= 8) {
             div_result_senha.innerHTML=``
@@ -197,6 +198,11 @@
             return
         }
 
+        while(contador < senha.length) {
+            if(senha.length == '@') {
+                div_result_senha+=``
+            }
+        }
     }
 
     function verSenha() {
