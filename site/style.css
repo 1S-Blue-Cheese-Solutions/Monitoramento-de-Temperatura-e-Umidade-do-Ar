@@ -386,16 +386,11 @@
       color: #6a7c8e;
     }
 
-    /* Simulator */
     .simulator-placeholder {
       margin-top: 28px;
       height: 520px;
       border-radius: 2px;
-      background:
-        linear-gradient(45deg, #eeeeee 25%, transparent 25%) 0 0 / 64px 64px,
-        linear-gradient(45deg, transparent 75%, #eeeeee 75%) 0 0 / 64px 64px,
-        linear-gradient(45deg, transparent 75%, #eeeeee 75%) 32px -32px / 64px 64px,
-        linear-gradient(45deg, #eeeeee 25%, #f7f7f7 25%) 32px 32px / 64px 64px;
+      background-color: black;
       border: 1px solid #eeeeea;
     }
 
