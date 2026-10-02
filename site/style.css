@@ -513,6 +513,7 @@
       border-radius: 50%;
       background: #2ecc71;
     }
+
 .simulator-placeholder {
     margin-top: 28px;
     padding: 30px;
@@ -556,3 +557,143 @@
     border-radius: 10px;
     background: var(--surface-2);
 }
+
+    /* LOGIN */
+    .main-login {
+      height: 100vh;
+      background-image: url(img/fundoBC.png);
+    }
+
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1001;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(110, 118, 130, 0.6);
+    }
+
+    .login-card {
+      display: flex;
+      width: 960px;
+      height: 580px;
+      border-radius: 64px;
+      background-color: white;
+    }
+
+    .login-intro, .login-panel {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .login-intro {
+      align-items: center;
+      text-align: center;
+      color: #1b2a5a;
+    }
+
+    .login-intro img {
+      width: 130px;
+      margin-bottom: 50px;
+    }
+
+    .login-intro h1 {
+      font-family: Georgia, serif;
+      font-size: 31px;
+      margin: 0 0 50px;
+    }
+
+    .login-intro p {
+      font-size: 25px;
+      margin: 0;
+    }
+
+    .login-panel {
+      background-color: #1a3c6e;
+      border: 3px solid #4a4d55;
+      border-left: none;
+      border-radius: 0 64px 64px 0;
+      color: white;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .login-form label {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .login-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 48px;
+      padding: 0 16px;
+      border-radius: 10px;
+      background-color: white;
+    }
+
+    .lock-icon, .mail-icon {
+      width: 18px;
+    }
+
+    .login-field input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .login-ver {
+      border: none;
+      background: none;
+      font-size: 11px;
+      color: #44506a;
+      cursor: pointer;
+    }
+
+    .login-msg {
+      height: 18px;
+      margin: 6px 0 20px;
+      font-size: 12px;
+      color: #f3e7b9;
+    }
+
+    .login-entrar {
+      height: 42px;
+      margin-top: 14px;
+      border: 1px solid white;
+      border-radius: 20px;
+      background-color: #1a3c6e;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-entrar:hover {
+      background-color: white;
+      color: #1a3c6e;
+    }
+
+    .login-registro {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .login-registro a {
+      margin-left: 20px;
+      font-weight: bold;
+    }
+/* END LOGIN */
