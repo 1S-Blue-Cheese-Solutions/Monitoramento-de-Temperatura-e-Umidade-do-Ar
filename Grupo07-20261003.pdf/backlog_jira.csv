@@ -1,0 +1,115 @@
+﻿Issue Type,Summary,Description,Epic Name,Epic Link,Priority,Labels
+Epic,Gestão e Governança do Projeto,"Épico de gestão. Reúne a configuração do ambiente de trabalho do time, o versionamento do código, a documentação do projeto e a organização das sprints na ferramenta de gestão. Não entrega funcionalidade ao usuário final: existe para dar rastreabilidade e organização ao desenvolvimento.",Gestao e Governanca do Projeto,,High,gestao
+Epic,Requisitos do Projeto,"Épico de escopo. Concentra todos os requisitos funcionais (RF) e não funcionais (RNF) acordados para o produto, servindo como referência única de escopo entre cliente e Product Owner. Cada requisito é um item do tipo Requisito e deve ser vinculado, via Issue Link, às user stories que o realizam.",Requisitos do Projeto,,Highest,escopo
+Epic,Site Institucional,"Épico de valor. Área pública da solução: apresenta a marca e o projeto ao visitante, oferece o simulador financeiro e dá acesso às páginas de cadastro e login. Público-alvo: visitantes não autenticados.",Site Institucional,,High,valor
+Epic,Portal do Cliente,"Épico de valor. Área autenticada da solução, no mesmo domínio e repositório do site institucional. Reúne cadastro, login e a dashboard de acompanhamento da temperatura e umidade do ambiente de maturação dos queijos azuis. Público-alvo: clientes autenticados.",Portal do Cliente,,Highest,valor
+Epic,Captação de Dados via IoT,"Épico habilitador. Responsável pela medição automática de temperatura e umidade do ar no ambiente de maturação por meio de Arduino e sensor, e pela disponibilização dessas leituras às demais camadas da solução.",Captacao de Dados via IoT,,Highest,habilitador
+Epic,Infraestrutura de Dados,"Épico habilitador. Responsável pela persistência do histórico de leituras: modelagem de dados, criação do banco e scripts de manipulação, hospedados em servidor MySQL em VM Linux.",Infraestrutura de Dados,,Highest,habilitador
+Epic,Validação Técnica da Solução,"Épico de qualidade. Garante que a arquitetura implementada corresponde ao desenho proposto e que a solução funciona de ponta a ponta (sensor, banco de dados e dashboard) antes da entrega da sprint.",Validacao Tecnica da Solucao,,High,qualidade
+Requisito,[RF01] O site deve apresentar as informações institucionais da marca e da solução.,O site deve apresentar as informações institucionais da marca e da solução.,,Requisitos do Projeto,High,"RF,site-institucional"
+Requisito,[RF02] O site deve permitir a navegação entre suas seções por meio de menu.,O site deve permitir a navegação entre suas seções por meio de menu.,,Requisitos do Projeto,High,"RF,site-institucional"
+Requisito,[RF03] O site deve calcular e exibir uma estimativa financeira a partir dos valores informados pelo visitante.,O site deve calcular e exibir uma estimativa financeira a partir dos valores informados pelo visitante.,,Requisitos do Projeto,High,"RF,site-institucional"
+Requisito,[RF04] O site deve oferecer acesso às páginas de cadastro e login.,O site deve oferecer acesso às páginas de cadastro e login.,,Requisitos do Projeto,High,"RF,site-institucional"
+Requisito,[RF05] O sistema deve disponibilizar um formulário de cadastro de cliente.,O sistema deve disponibilizar um formulário de cadastro de cliente.,,Requisitos do Projeto,High,"RF,portal-cliente"
+Requisito,[RF06] O sistema deve validar os dados informados no cadastro e sinalizar os campos inválidos.,O sistema deve validar os dados informados no cadastro e sinalizar os campos inválidos.,,Requisitos do Projeto,High,"RF,portal-cliente"
+Requisito,[RF07] O sistema deve disponibilizar um formulário de login.,O sistema deve disponibilizar um formulário de login.,,Requisitos do Projeto,High,"RF,portal-cliente"
+Requisito,[RF08] O sistema deve direcionar o cliente à dashboard após o login válido.,O sistema deve direcionar o cliente à dashboard após o login válido.,,Requisitos do Projeto,High,"RF,portal-cliente"
+Requisito,[RF09] A dashboard deve exibir graficamente as leituras de temperatura e umidade do ambiente de maturação.,A dashboard deve exibir graficamente as leituras de temperatura e umidade do ambiente de maturação.,,Requisitos do Projeto,High,"RF,portal-cliente"
+Requisito,[RF10] A dashboard deve permitir a consulta das leituras por intervalo de data e hora.,A dashboard deve permitir a consulta das leituras por intervalo de data e hora.,,Requisitos do Projeto,High,"RF,portal-cliente"
+Requisito,[RF11] O sistema deve coletar automaticamente leituras de temperatura e umidade do ar do ambiente de maturação.,O sistema deve coletar automaticamente leituras de temperatura e umidade do ar do ambiente de maturação.,,Requisitos do Projeto,High,"RF,iot"
+Requisito,[RF12] O sistema deve registrar a data e a hora de cada leitura coletada.,O sistema deve registrar a data e a hora de cada leitura coletada.,,Requisitos do Projeto,High,"RF,iot"
+Requisito,[RF13] O sistema deve disponibilizar as leituras coletadas para exibição ao cliente.,O sistema deve disponibilizar as leituras coletadas para exibição ao cliente.,,Requisitos do Projeto,High,"RF,iot"
+Requisito,[RF14] O sistema deve armazenar de forma permanente o histórico das leituras coletadas.,O sistema deve armazenar de forma permanente o histórico das leituras coletadas.,,Requisitos do Projeto,High,"RF,infraestrutura"
+Requisito,[RF15] O sistema deve permitir a recuperação das leituras armazenadas por período.,O sistema deve permitir a recuperação das leituras armazenadas por período.,,Requisitos do Projeto,High,"RF,infraestrutura"
+Requisito,[RNF01] O site deve se adaptar a telas de desktop e dispositivos móveis.,O site deve se adaptar a telas de desktop e dispositivos móveis.,,Requisitos do Projeto,High,"RNF,site-institucional"
+Requisito,[RNF02] O simulador deve indicar ao visitante quando os valores informados forem inválidos.,O simulador deve indicar ao visitante quando os valores informados forem inválidos.,,Requisitos do Projeto,High,"RNF,site-institucional"
+Requisito,[RNF03] As telas do portal devem se adaptar a desktop e dispositivos móveis.,As telas do portal devem se adaptar a desktop e dispositivos móveis.,,Requisitos do Projeto,High,"RNF,portal-cliente"
+Requisito,[RNF04] Os gráficos devem identificar claramente a grandeza exibida e sua unidade de medida.,Os gráficos devem identificar claramente a grandeza exibida e sua unidade de medida.,,Requisitos do Projeto,High,"RNF,portal-cliente"
+Requisito,[RNF05] O sistema deve informar ao cliente quando não houver leituras disponíveis para o período consultado.,O sistema deve informar ao cliente quando não houver leituras disponíveis para o período consultado.,,Requisitos do Projeto,High,"RNF,portal-cliente"
+Requisito,[RNF06] As leituras devem ser coletadas em intervalo periódico definido.,As leituras devem ser coletadas em intervalo periódico definido. OBSERVACAO: o valor do intervalo ainda deve ser definido pela equipe com base na literatura de maturação de queijos azuis.,,Requisitos do Projeto,High,"RNF,iot"
+Requisito,[RNF07] A temperatura deve ser apresentada em graus Celsius (C) e a umidade em umidade relativa do ar (%UR).,A temperatura deve ser apresentada em graus Celsius (C) e a umidade em umidade relativa do ar (%UR).,,Requisitos do Projeto,High,"RNF,iot"
+Requisito,[RNF08] A falha em uma leitura não deve interromper as coletas seguintes.,A falha em uma leitura não deve interromper as coletas seguintes.,,Requisitos do Projeto,High,"RNF,iot"
+Requisito,[RNF09] O histórico de leituras não deve ser perdido em caso de reinício da aplicação.,O histórico de leituras não deve ser perdido em caso de reinício da aplicação.,,Requisitos do Projeto,High,"RNF,infraestrutura"
+Story,"Como cliente, quero acompanhar o andamento e a documentação do projeto, para ter visibilidade sobre o que está sendo entregue.","User story de acompanhamento. O cliente precisa enxergar o progresso do projeto por meio dos artefatos produzidos pelo time (documentação, backlog priorizado e repositório atualizado).",,Gestao e Governanca do Projeto,Medium,user-story
+Story,"Como visitante, quero conhecer a marca e o propósito da solução, para entender o que é oferecido.","Criterios de aceite:
+- A pagina inicial apresenta a marca e a proposta da solucao.
+- O conteudo institucional esta legivel em desktop e mobile.
+Requisitos relacionados: RF01, RNF01.",,Site Institucional,High,user-story
+Story,"Como visitante, quero navegar facilmente entre as seções do site, para encontrar a informação que procuro.","Criterios de aceite:
+- Existe menu de navegacao acessivel em todas as paginas publicas.
+- Todos os itens do menu levam a secao correspondente.
+Requisitos relacionados: RF02.",,Site Institucional,High,user-story
+Story,"Como visitante, quero simular uma estimativa financeira, para avaliar se a solução compensa para mim.","Criterios de aceite:
+- O visitante informa os valores de entrada e recebe o resultado calculado na tela.
+- Valores invalidos sao sinalizados ao visitante.
+Requisitos relacionados: RF03, RNF02.",,Site Institucional,Medium,user-story
+Story,"Como visitante, quero acessar a área de cliente pelo site, para entrar na minha dashboard.","Criterios de aceite:
+- Existe chamada visivel de acesso (login/cadastro) a partir do site institucional.
+Requisitos relacionados: RF04.",,Site Institucional,Medium,user-story
+Story,"Como novo cliente, quero me cadastrar na plataforma, para poder acessar o monitoramento.","Criterios de aceite:
+- Formulario de cadastro disponivel.
+- Campos obrigatorios e formatos invalidos sao sinalizados ao usuario.
+OBSERVACAO: nesta fase as validacoes sao feitas apenas no front-end.
+Requisitos relacionados: RF05, RF06.",,Portal do Cliente,High,user-story
+Story,"Como cliente cadastrado, quero fazer login, para entrar na minha dashboard.","Criterios de aceite:
+- Formulario de login disponivel.
+- Apos login valido o cliente e direcionado a dashboard.
+Requisitos relacionados: RF07, RF08.",,Portal do Cliente,High,user-story
+Story,"Como cliente, quero visualizar graficamente a temperatura e a umidade do ambiente, para acompanhar as condições de maturação dos queijos.","Criterios de aceite:
+- Graficos de temperatura e umidade exibidos na dashboard.
+- Cada grafico identifica a grandeza e a unidade de medida.
+- A dashboard e responsiva.
+Requisitos relacionados: RF09, RNF03, RNF04.",,Portal do Cliente,Highest,user-story
+Story,"Como cliente, quero consultar as leituras de um período específico, para analisar o histórico do processo.","Criterios de aceite:
+- O cliente seleciona data/hora inicial e final.
+- Quando nao ha leituras no periodo, o sistema informa o cliente.
+Requisitos relacionados: RF10, RNF05.",,Portal do Cliente,High,user-story
+Story,"Como cliente, quero que as condições do ambiente de maturação sejam medidas automaticamente, para não depender de conferência manual.","Criterios de aceite:
+- As leituras de temperatura e umidade sao coletadas periodicamente sem acao manual.
+- Cada leitura registra data e hora.
+- Temperatura em C e umidade em %UR.
+- Falha em uma leitura nao interrompe as coletas seguintes.
+Requisitos relacionados: RF11, RF12, RF13, RNF06, RNF07, RNF08.",,Captacao de Dados via IoT,Highest,user-story
+Story,"Como cliente, quero que o histórico de medições seja preservado, para poder consultar períodos anteriores do processo de maturação.","Criterios de aceite:
+- As leituras sao gravadas de forma permanente.
+- As leituras podem ser recuperadas por periodo.
+- O historico permanece apos reinicio da aplicacao.
+Requisitos relacionados: RF14, RF15, RNF09.",,Infraestrutura de Dados,Highest,user-story
+Story,"Como cliente, quero a garantia de que a solução funciona de ponta a ponta, para confiar nos dados que vou acompanhar.","User story de qualidade. Cobre a validacao integrada da solucao (sensor, banco de dados e dashboard) e a homologacao do diagrama de arquitetura.",,Validacao Tecnica da Solucao,High,user-story
+Task,Criar e configurar o projeto no GitHub,"Criar o repositorio remoto do projeto, definir visibilidade e permissoes dos integrantes, criar o README inicial e a estrutura de pastas. Configurar a branch principal e o padrao de commits adotado pelo time.",,Gestao e Governanca do Projeto,Highest,tarefa
+Task,Escrever o Contexto de Negócio,"Descrever o cenario em que a solucao se insere: o processo de maturacao de queijos azuis, a importancia do controle de temperatura e umidade e o problema que a solucao pretende resolver.",,Gestao e Governanca do Projeto,High,tarefa
+Task,Escrever a Justificativa do Projeto,"Justificar a necessidade da solucao, apresentando os impactos do controle inadequado das condicoes ambientais na producao e os beneficios esperados com o monitoramento automatizado.",,Gestao e Governanca do Projeto,High,tarefa
+Task,Criar o Diagrama de Visão de Negócio,"Elaborar o diagrama que relaciona problema, solucao proposta, stakeholders e beneficios esperados, servindo como visao macro do projeto para apresentacao.",,Gestao e Governanca do Projeto,High,tarefa
+Task,Produzir a documentação inicial do projeto,"Consolidar em documento unico o contexto de negocio, a justificativa, o diagrama de visao, o escopo (requisitos) e a estrutura do time.",,Gestao e Governanca do Projeto,High,tarefa
+Task,Atualizar a documentação do projeto,"Revisar e atualizar a documentacao ao final da sprint, incorporando as mudancas de escopo, decisoes tecnicas e artefatos produzidos no periodo.",,Gestao e Governanca do Projeto,Medium,tarefa
+Task,Elaborar a Planilha de Riscos do Projeto,"Identificar os riscos do projeto, classificar por probabilidade e impacto, definir acoes de mitigacao e responsaveis por cada risco.",,Gestao e Governanca do Projeto,Medium,tarefa
+Task,Realizar a pesquisa de Pesquisa e Inovação,"Levantar referencias e solucoes existentes de monitoramento ambiental aplicadas a maturacao de alimentos, registrando as fontes e o diferencial da solucao do time.",,Gestao e Governanca do Projeto,Medium,tarefa
+Task,Configurar a ferramenta de gestão de projeto (Jira),"Criar o projeto no Jira, configurar o quadro, os tipos de item (incluindo Requisito), o fluxo de status e habilitar o vinculo entre itens (Issue Linking).",,Gestao e Governanca do Projeto,Highest,tarefa
+Task,Popular os requisitos na ferramenta de gestão,Importar ou cadastrar todos os RF e RNF como itens do tipo Requisito dentro do epico Requisitos do Projeto e vincula-los as user stories correspondentes.,,Gestao e Governanca do Projeto,Highest,tarefa
+Task,Organizar as atividades em sprints,"Distribuir as tarefas e stories entre as sprints planejadas, respeitando dependencias tecnicas e a capacidade do time.",,Gestao e Governanca do Projeto,High,tarefa
+Task,"Montar o Backlog da Sprint com demanda, pontuação e prioridade","Selecionar os itens da sprint, atribuir pontuacao (story points) e definir a prioridade de cada item no backlog.",,Gestao e Governanca do Projeto,High,tarefa
+Task,Criar o protótipo do site institucional,"Elaborar o wireframe/prototipo das paginas publicas, incluindo a home institucional, a tela do simulador financeiro e os pontos de acesso ao cadastro e login. Definir a identidade visual e a estrutura de navegacao.",,Site Institucional,High,tarefa
+Task,Implementar o site estático institucional (HTML/CSS/JS),"Desenvolver as paginas publicas em HTML, CSS e JavaScript conforme o prototipo, aplicando estruturas de repeticao na construcao de secoes dinamicas e garantindo layout responsivo.",,Site Institucional,High,tarefa
+Task,Implementar a tela e a lógica do simulador financeiro,"Construir o formulario de entrada de dados, implementar o calculo da estimativa financeira em JavaScript, exibir o resultado na tela e sinalizar entradas invalidas ao visitante.",,Site Institucional,Medium,tarefa
+Task,"Integrar a navegação entre site institucional, simulador e área de acesso","Conectar as paginas por meio do menu e dos links de acesso, garantindo que o simulador e as telas de cadastro/login sejam alcancaveis a partir do site e mantenham a mesma identidade visual.",,Site Institucional,Medium,tarefa
+Task,Elaborar a Especificação da Dashboard,"Definir quais metricas serao exibidas, os tipos de grafico, os filtros disponiveis e o layout da dashboard, produzindo o documento de especificacao e o wireframe da tela.",,Portal do Cliente,High,tarefa
+Task,Implementar o site estático de cadastro e login,"Desenvolver as telas de cadastro e login em HTML e CSS, seguindo a identidade visual do site institucional e mantendo-as no mesmo dominio e repositorio.",,Portal do Cliente,High,tarefa
+Task,Implementar as validações de cadastro e login no front-end,"Implementar em JavaScript a verificacao de campos obrigatorios, formatos e consistencia dos dados, sinalizando os campos invalidos ao usuario. Nesta fase nao ha backend: as validacoes ocorrem apenas no cliente.",,Portal do Cliente,High,tarefa
+Task,Implementar o site estático da dashboard com ChartJS,"Construir a pagina da dashboard e renderizar os graficos de temperatura e umidade com a biblioteca ChartJS, identificando grandeza e unidade de medida em cada grafico e garantindo responsividade.",,Portal do Cliente,Highest,tarefa
+Task,Integrar a dashboard à fonte de dados,"Substituir os dados de exemplo pela leitura real proveniente da API local/banco de dados, implementar o filtro por periodo e tratar o caso de ausencia de leituras no intervalo consultado.",,Portal do Cliente,Highest,tarefa
+Task,Ligar o Arduino e validar o hardware,"Montar o circuito, conectar o sensor de temperatura e umidade ao Arduino, energizar a placa e confirmar que o hardware esta operacional.",,Captacao de Dados via IoT,Highest,tarefa
+Task,Rodar o código de leitura no Arduino,"Desenvolver e carregar o codigo de leitura periodica do sensor, exibindo os valores no monitor serial para conferencia inicial de temperatura e umidade.",,Captacao de Dados via IoT,Highest,tarefa
+Task,Realizar teste com o sensor e gerar gráficos,"Executar a coleta de dados com o sensor do projeto, registrar as leituras e gerar graficos a partir delas para simular a integracao do sistema ponta a ponta.",,Captacao de Dados via IoT,High,tarefa
+Task,Implementar o consumo da API local do sensor,Disponibilizar as leituras coletadas por meio de API local e implementar o consumo desses dados pelas demais camadas da solucao.,,Captacao de Dados via IoT,High,tarefa
+Task,Implementar a inserção dos dados do Arduino no MySQL,"Desenvolver a rotina que recebe as leituras do Arduino e as grava nas tabelas do MySQL hospedado na VM Linux, registrando data e hora de cada leitura.",,Captacao de Dados via IoT,Highest,tarefa
+Task,Realizar setup do client de virtualização,"Instalar e configurar o software de virtualizacao na maquina local, preparando o ambiente para a criacao da maquina virtual do servidor de dados.",,Infraestrutura de Dados,Highest,tarefa
+Task,Instalar Linux em VM local,"Criar a maquina virtual, instalar a distribuicao Linux escolhida, configurar rede e acesso, e validar o funcionamento do ambiente.",,Infraestrutura de Dados,Highest,tarefa
+Task,Instalar o MySQL no servidor de dados (VM Linux),"Instalar o MySQL na VM Linux, configurar usuario e permissoes de acesso e validar a conexao ao servidor de banco de dados.",,Infraestrutura de Dados,Highest,tarefa
+Task,Criar a Modelagem Lógica do Projeto v1,"Elaborar o modelo logico de dados (DER/MER) contemplando as entidades de leitura de sensores e de cliente, com atributos, chaves e relacionamentos definidos.",,Infraestrutura de Dados,Highest,tarefa
+Task,Criar as tabelas no MySQL (protótipo individual),"Implementar no MySQL as tabelas definidas na modelagem logica, aplicando tipos de dados, chaves primarias e estrangeiras e restricoes de integridade.",,Infraestrutura de Dados,High,tarefa
+Task,Escrever o script de criação do banco e tabelas,"Produzir o script SQL de criacao do banco e das tabelas, versiona-lo no repositorio e garantir que ele possa ser executado do zero em um ambiente limpo.",,Infraestrutura de Dados,High,tarefa
+Task,Escrever e executar o script de inserção de registros,"Produzir o script SQL de insercao de registros de teste, executa-lo no banco local e validar a gravacao correta dos dados.",,Infraestrutura de Dados,High,tarefa
+Task,Escrever e executar o script de consulta de dados,"Produzir as consultas SQL necessarias para recuperar as leituras, incluindo a consulta por intervalo de data e hora, e validar os resultados retornados.",,Infraestrutura de Dados,High,tarefa
+Task,Criar o Diagrama de Solução (arquitetura técnica),"Elaborar o diagrama que representa a arquitetura tecnica do projeto, mostrando sensor, Arduino, API local, servidor MySQL em VM Linux e as paginas web (site institucional e portal do cliente).",,Validacao Tecnica da Solucao,High,tarefa
+Task,Validar a solução técnica de ponta a ponta,"Executar o teste integrado da solucao: coleta pelo sensor, gravacao no banco de dados e exibicao na dashboard, registrando as inconsistencias encontradas e as correcoes aplicadas.",,Validacao Tecnica da Solucao,Highest,tarefa
+Task,Atualizar e homologar o Diagrama da Solução validado,"Revisar o diagrama de solucao a partir do resultado da validacao tecnica, ajustar o que divergir da implementacao real e registrar a versao homologada na documentacao.",,Validacao Tecnica da Solucao,High,tarefa
