@@ -77,3 +77,9 @@ fkSensorAmbiente int,
 fkAmbienteProcesso int,
 	constraint fkLeituraSensor_ambienteProcesso foreign key (fkAmbienteProcesso) references ambienteProcesso(idAmbienteProcesso)
 );
+
+drop table leituraSensor;
+
+INSERT INTO leituraSensor (sensorUmidade, sensorTemperatura) VALUES (98, 12);
+
+select * from leituraSensor;
