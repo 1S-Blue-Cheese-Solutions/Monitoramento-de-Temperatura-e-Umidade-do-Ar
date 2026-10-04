@@ -26,7 +26,7 @@ flowchart LR
 | Site Institucional | [Figma](https://www.figma.com/design/x1H7kIV6jTcIsrpbcfmXkY/Prot%C3%B3tipo-Site-Institucional?t=VjGqwV4s5uzStGkh-1) |
 | Tarefas | [Trello](https://trello.com/b/UveA5rzU/1s-blue-cheese-solutions) |
 | Slide | [Canva](https://canva.link/xmequv2bsg04uer) |
-| Arduino | [Tinkercad](https://www.tinkercad.com/things/bXdLR7ZahWf-1s-blue-cheese-solutions?sharecode=7Iuf28ZjUgrUizOj0Ka3jAzG1GE3slGxypQFNji5TE4) |
+| Arduino | [Tinkercad](https://www.tinkercad.com/things/8F3M1LrF4G5-1s-blue-cheese-solutions?sharecode=fDw5O4h4axVky3vQgS56hJP7YLyChheD-giTP9izQ8A) |
 
 ## 👥 Equipe
 
