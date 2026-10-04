@@ -69,7 +69,8 @@ fkSensor int,
 
 create table leituraSensor (
 idLeituraSensor int primary key auto_increment,
-valor decimal(10,2),
+sensorUmidade float,
+sensorTemperatura float,
 dataHora datetime,
 fkSensorAmbiente int,
 	constraint fkLeituraSensor_SensorAmbiente foreign key (fkSensorAmbiente) references sensorAmbiente(idSensorAmbiente),
