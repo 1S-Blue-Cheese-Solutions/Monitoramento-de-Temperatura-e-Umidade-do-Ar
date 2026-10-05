@@ -27,6 +27,7 @@ flowchart LR
 | Tarefas | [Trello](https://trello.com/b/UveA5rzU/1s-blue-cheese-solutions) |
 | Slide | [Canva](https://canva.link/xmequv2bsg04uer) |
 | Arduino | [Tinkercad](https://www.tinkercad.com/things/8F3M1LrF4G5-1s-blue-cheese-solutions?sharecode=fDw5O4h4axVky3vQgS56hJP7YLyChheD-giTP9izQ8A) |
+| Tabela Riscos | [Excel](https://bandteccom-my.sharepoint.com/:x:/g/personal/guilherme_rosa_sptech_school/IQCg7UB4xyClRrnbfCy09L_mASW8E9gfAGzkURspt6Sb4SU?e=tempbw) |
 
 ## 👥 Equipe
 
