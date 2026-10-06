@@ -35,16 +35,7 @@ O projeto nasceu com **3 objetivos**:
 
 <div align="center">
   <img src=".docs/.img/diagrama-de-negocios.png" alt="Diagrama de negócios da Blue Cheese Solutions" width="800" />
-  <br>
-  <br>
-  <br>
 </div>
-
-| Pasta | Conteúdo |
-|---|---|
-| [`arduino/`](arduino) | Código de captação do sensor DHT11 e API serial (`dat-acqu-ino`) |
-| [`banco-de-dados/`](banco-de-dados) | Modelagem lógica e script físico do banco `BlueCheeseSol` |
-| [`site-institucional/`](site-institucional) | Site institucional, login, registro e simulador financeiro |
 
 ## 🔗 Links
 
