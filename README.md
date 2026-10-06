@@ -2,7 +2,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f325f,100:123d72&height=120&section=header" alt="" width="100%" />
 
-<img src=".docs/.img/logo-blue-cheese.png" alt="Logo Blue Cheese Solutions" width="320" />
+<img src=".docs/.assets/logo-blue-cheese.png" alt="Logo Blue Cheese Solutions" width="320" />
 
 ### Monitore o ambiente. *Aperfeiçoe a maturação.*
 
@@ -16,7 +16,7 @@
 </div>
 
 <div align="center">
-  <img src=".docs/.img/camara-maturacao.png" alt="Protótipo do sensor de temperatura e umidade em uma caverna de maturação de queijos azuis" width="800" />
+  <img src=".docs/.assets/camara-maturacao.png" alt="Protótipo do sensor de temperatura e umidade em uma caverna de maturação de queijos azuis" width="800" />
 </div>
 
 ## 🧀 Sobre o projeto
@@ -34,7 +34,7 @@ O projeto nasceu com **3 objetivos**:
 ## ⚙️ Como funciona
 
 <div align="center">
-  <img src=".docs/.img/diagrama-de-negocios.png" alt="Diagrama de negócios da Blue Cheese Solutions" width="800" />
+  <img src=".docs/.assets/diagrama-de-negocios.png" alt="Diagrama de negócios da Blue Cheese Solutions" width="800" />
 </div>
 
 ## 🔗 Links
