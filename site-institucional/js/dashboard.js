@@ -1,437 +1,106 @@
-const labels = [
-  "21:11",
-  "22:11",
-  "23:11",
-  "00:11",
-  "01:11",
-  "02:11",
-  "03:11",
-  "04:11",
-  "05:11",
-  "06:11",
-  "07:11",
-  "08:11",
-  "09:11",
-  "10:11",
-  "11:11",
-  "12:11",
-  "13:11",
-  "14:11",
-  "15:11",
-  "16:11",
-  "17:11",
-  "18:11",
-  "19:11",
-  "20:11",
-];
-
-const temperaturas = [
-  9.4, 9.8, 9.2, 10.1, 10.6, 10.4, 10.9, 11.2, 10.8, 11.1, 10.9, 11.3, 10.7,
-  10.2, 10.5, 9.8, 9.1, 9.7, 8.8, 8.6, 8.9, 8.5, 8.7, 8.9,
-];
-
-const umidades = [
-  91.0, 91.8, 91.2, 92.8, 93.1, 92.5, 93.4, 94.2, 94.5, 95.3, 95.8, 95.2, 96.1,
-  95.4, 96.4, 95.9, 95.3, 95.7, 94.9, 95.2, 86.2, 86.7, 94.8, 92.7,
-];
-
-const faixaTemperatura = {
-  min: 8,
-  max: 12,
+/* Dados de demonstração. Substitua gerarSerie() e cameras por leituras da sua API. */
+const cameras = {
+  1: {temp:8.9, humidity:92.7, ideal:94, tempIdeal:[8,12], humIdeal:[90,98], conformTemp:95, conformHum:94},
+  2: {temp:9.6, humidity:95.4, ideal:93, tempIdeal:[8,12], humIdeal:[90,98], conformTemp:94, conformHum:94},
+  3: {temp:8.1, humidity:81.2, ideal:89, tempIdeal:[6,8], humIdeal:[83,87], conformTemp:94, conformHum:94}
 };
-
-const faixaUmidade = {
-  min: 90,
-  max: 98,
+const alerts = [
+ {type:'critical',name:'Crítico',cam:3,msg:'Temperatura 8,1 °C (ideal 6–8 °C)',time:'17:58'},
+ {type:'warning',name:'Atenção',cam:3,msg:'Umidade 81,2% (ideal 83–87%)',time:'17:58'},
+ {type:'warning',name:'Atenção',cam:3,msg:'Temperatura 8,3 °C (ideal 6–8 °C)',time:'17:56'},
+ {type:'warning',name:'Atenção',cam:3,msg:'Umidade 81,5% (ideal 83–87%)',time:'17:56'},
+ {type:'warning',name:'Atenção',cam:1,msg:'Umidade 86,1% (ideal 90–98%)',time:'17:42'},
+ {type:'warning',name:'Atenção',cam:3,msg:'Temperatura 8,2 °C (ideal 6–8 °C)',time:'17:40'},
+ {type:'warning',name:'Atenção',cam:3,msg:'Umidade 80,9% (ideal 83–87%)',time:'17:37'},
+ {type:'warning',name:'Atenção',cam:1,msg:'Temperatura 12,1 °C (ideal 8–12 °C)',time:'17:29'},
+ {type:'warning',name:'Atenção',cam:1,msg:'Umidade 87,1% (ideal 90–98%)',time:'17:22'},
+ {type:'warning',name:'Atenção',cam:2,msg:'Temperatura 12,2 °C (ideal 8–12 °C)',time:'16:53'},
+ {type:'warning',name:'Atenção',cam:2,msg:'Umidade 89,5% (ideal 90–98%)',time:'16:48'}
+];
+const $ = id => document.getElementById(id);
+const pt = n => n.toFixed(1).replace('.',',');
+const state = {cam:1,hours:24};
+let chartTemperature, chartHumidity, chartCompliance;
+function gerarSerie(cam,hours,mode) {
+  const points = hours * 6 + 1;
+  return Array.from({length:points}, (_,i)=>{
+    const t=i/Math.max(points-1,1), phase=cam*.68;
+    const v= mode==='temp'
+      ? (10.2 + 1.15*Math.sin(t*5.5+phase) + .23*Math.sin(i*.81)+ .18*Math.cos(i*1.29) + (t>.93?1.4:0))
+      : (93.1 + 2.1*Math.sin(t*3.1-.75+phase) + .34*Math.cos(i*.5) + (t>.93?-8.1:0));
+    return Math.round(v*10)/10;
+  });
+}
+const idealBand = {
+  id:'idealBand',
+  beforeDatasetsDraw(chart) {
+    if(!chart.options.plugins.idealBand) return;
+    const {ctx, chartArea, scales:{y}}=chart;
+    const {min,max}=chart.options.plugins.idealBand;
+    ctx.save();ctx.fillStyle='rgba(46, 139, 92, 0.105)';
+    const top=Math.max(chartArea.top,y.getPixelForValue(max));
+    const bottom=Math.min(chartArea.bottom,y.getPixelForValue(min));
+    ctx.fillRect(chartArea.left,top,chartArea.right-chartArea.left,Math.max(0,bottom-top));ctx.restore();
+  }
 };
-
-/* PLUGIN PARA DESENHAR A FAIXA IDEAL */
-
-const faixaIdealPlugin = {
-  id: "faixaIdeal",
-
-  beforeDraw(chart, args, options) {
-    const { ctx, chartArea, scales } = chart;
-
-    if (!chartArea) {
-      return;
+function lineChart(id, data, color, min, max, band, hours) {
+  const labels = data.map((_,i) => {
+    const minutes = (21*60+11 + Math.round(i*hours*60/(data.length-1)))%(24*60);
+    return `${String(Math.floor(minutes/60)).padStart(2,'0')}:${String(minutes%60).padStart(2,'0')}`;
+  });
+  return new Chart($(id), {
+    type:'line', data:{labels,datasets:[{data,borderColor:color,borderWidth:1.8,pointRadius:0,tension:.25,fill:false}]},
+    plugins:[idealBand],
+    options:{responsive:true,maintainAspectRatio:false,animation:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},idealBand:{min:band[0],max:band[1]},tooltip:{callbacks:{label:context=>`${pt(context.parsed.y)} ${id==='graficoTemperatura'?'°C':'%'}`}}},
+      scales:{x:{grid:{display:false},border:{display:false},ticks:{maxTicksLimit:8,color:'#607993',font:{size:10},maxRotation:0}},
+      y:{min,max,grid:{color:'#ecf0ef'},border:{display:false},ticks:{color:'#607993',font:{size:10},callback:value=>`${value}${id==='graficoTemperatura'?'°':'%'}`}}}
     }
-
-    const y = scales.y;
-
-    const min = options.min;
-    const max = options.max;
-
-    const yTop = y.getPixelForValue(max);
-    const yBottom = y.getPixelForValue(min);
-
-    ctx.save();
-
-    ctx.fillStyle = "rgba(45, 130, 85, 0.10)";
-
-    ctx.fillRect(
-      chartArea.left,
-      yTop,
-      chartArea.right - chartArea.left,
-      yBottom - yTop,
-    );
-
-    ctx.restore();
-  },
-};
-
-/* GRÁFICO DE TEMPERATURA */
-
-new Chart(document.getElementById("temperaturaChart"), {
-  type: "line",
-
-  data: {
-    labels: labels,
-
-    datasets: [
-      {
-        label: "Temperatura",
-        data: temperaturas,
-
-        borderColor: "#16467e",
-
-        borderWidth: 2,
-
-        pointRadius: 0,
-
-        pointHoverRadius: 4,
-
-        tension: 0.35,
-
-        fill: false,
-      },
-    ],
-  },
-
-  plugins: [faixaIdealPlugin],
-
-  options: {
-    responsive: true,
-
-    maintainAspectRatio: false,
-
-    interaction: {
-      intersect: false,
-      mode: "index",
-    },
-
-    plugins: {
-      legend: {
-        display: false,
-      },
-
-      tooltip: {
-        backgroundColor: "#18314d",
-
-        titleFont: {
-          size: 11,
-        },
-
-        bodyFont: {
-          size: 11,
-        },
-
-        padding: 9,
-
-        callbacks: {
-          label: function (context) {
-            return ` ${context.raw.toFixed(1)} °C`;
-          },
-        },
-      },
-
-      faixaIdeal: {
-        min: faixaTemperatura.min,
-        max: faixaTemperatura.max,
-      },
-    },
-
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-
-        ticks: {
-          color: "#7890a6",
-          font: {
-            size: 8,
-          },
-
-          maxTicksLimit: 8,
-        },
-
-        border: {
-          display: false,
-        },
-      },
-
-      y: {
-        min: 8,
-
-        max: 13,
-
-        ticks: {
-          stepSize: 0.5,
-
-          color: "#7890a6",
-
-          font: {
-            size: 8,
-          },
-
-          callback: function (value) {
-            return value + "°";
-          },
-        },
-
-        grid: {
-          color: "#edf0f2",
-        },
-
-        border: {
-          display: false,
-        },
-      },
-    },
-  },
-});
-
-/* GRÁFICO DE UMIDADE */
-
-new Chart(document.getElementById("umidadeChart"), {
-  type: "line",
-
-  data: {
-    labels: labels,
-
-    datasets: [
-      {
-        label: "Umidade",
-        data: umidades,
-
-        borderColor: "#29979a",
-
-        borderWidth: 2,
-
-        pointRadius: 0,
-
-        pointHoverRadius: 4,
-
-        tension: 0.35,
-
-        fill: false,
-      },
-    ],
-  },
-
-  plugins: [faixaIdealPlugin],
-
-  options: {
-    responsive: true,
-
-    maintainAspectRatio: false,
-
-    interaction: {
-      intersect: false,
-      mode: "index",
-    },
-
-    plugins: {
-      legend: {
-        display: false,
-      },
-
-      tooltip: {
-        backgroundColor: "#18314d",
-
-        callbacks: {
-          label: function (context) {
-            return ` ${context.raw.toFixed(1)}%`;
-          },
-        },
-      },
-
-      faixaIdeal: {
-        min: faixaUmidade.min,
-        max: faixaUmidade.max,
-      },
-    },
-
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-
-        ticks: {
-          color: "#7890a6",
-          font: {
-            size: 8,
-          },
-
-          maxTicksLimit: 8,
-        },
-
-        border: {
-          display: false,
-        },
-      },
-
-      y: {
-        min: 84,
-
-        max: 98,
-
-        ticks: {
-          stepSize: 2,
-
-          color: "#7890a6",
-
-          font: {
-            size: 8,
-          },
-
-          callback: function (value) {
-            return value + "%";
-          },
-        },
-
-        grid: {
-          color: "#edf0f2",
-        },
-
-        border: {
-          display: false,
-        },
-      },
-    },
-  },
-});
-
-/* CONFORMIDADE POR CÂMARA */
-
-new Chart(document.getElementById("conformidadeChart"), {
-  type: "bar",
-
-  data: {
-    labels: ["Câmara 1", "Câmara 2", "Câmara 3"],
-
-    datasets: [
-      {
-        label: "Temperatura",
-
-        data: [94, 93, 93],
-
-        backgroundColor: "#173f73",
-
-        borderRadius: 2,
-
-        barThickness: 21,
-      },
-
-      {
-        label: "Umidade",
-
-        data: [93, 93, 93],
-
-        backgroundColor: "#29999b",
-
-        borderRadius: 2,
-
-        barThickness: 21,
-      },
-    ],
-  },
-
-  options: {
-    responsive: true,
-
-    maintainAspectRatio: false,
-
-    indexAxis: "y",
-
-    plugins: {
-      legend: {
-        display: false,
-      },
-
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            return ` ${context.raw}%`;
-          },
-        },
-      },
-    },
-
-    scales: {
-      x: {
-        min: 0,
-
-        max: 100,
-
-        ticks: {
-          stepSize: 25,
-
-          color: "#7890a6",
-
-          font: {
-            size: 8,
-          },
-
-          callback: function (value) {
-            return value + "%";
-          },
-        },
-
-        grid: {
-          color: "#edf0f2",
-        },
-
-        border: {
-          display: false,
-        },
-      },
-
-      y: {
-        ticks: {
-          color: "#657c94",
-
-          font: {
-            size: 9,
-          },
-        },
-
-        grid: {
-          display: false,
-        },
-
-        border: {
-          display: false,
-        },
-      },
-    },
-  },
-});
-
-document.getElementById("camaraSelect").addEventListener("change", function () {
-  console.log("Câmara selecionada:", this.value);
-});
-
-document
-  .getElementById("periodoSelect")
-  .addEventListener("change", function () {
-    console.log("Período selecionado:", this.value);
   });
-
-document
-  .querySelector(".dashboard-sair")
-  .addEventListener("click", function () {
-    window.location.href = "index.html";
+}
+function complianceChart() {
+  return new Chart($('graficoConformidade'),{
+    type:'bar',data:{labels:['Câmara 1','Câmara 2','Câmara 3'], datasets:[
+      {label:'Temperatura',data:[95,94,94],backgroundColor:'#173f73',borderRadius:2,barPercentage:.78,categoryPercentage:.72},
+      {label:'Umidade',data:[94,94,94],backgroundColor:'#29999b',borderRadius:2,barPercentage:.78,categoryPercentage:.72}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.x}%`}}},
+      scales:{x:{min:0,max:100,grid:{color:'#edf0f3'},border:{display:false},ticks:{stepSize:25,color:'#607993',font:{size:10}}},
+      y:{grid:{display:false},border:{display:false},ticks:{color:'#607993',font:{size:10}}}}
+    }
   });
+}
+function renderAlerts() {
+  // Alertas reais deverão vir do backend com datas, valores e câmera correspondentes.
+  const filtered = alerts.filter(a=>state.hours===24 || (state.hours===12 ? true : a.time>='17:00'));
+  $('listaAlertas').innerHTML=filtered.map(a=>`<div class="dashboard-alert dashboard-${a.type}"><span class="alert-type">${a.type==='critical'?'✕':'!'} ${a.name}</span><span class="alert-description">Câmara ${a.cam} · ${a.msg}</span><time>${a.time}</time></div>`).join('');
+  $('totalAlertas').textContent=filtered.length;
+  $('resumoAlertas').textContent=`${filtered.filter(a=>a.type==='critical').length} crítico(s) · ${filtered.filter(a=>a.type==='warning').length} atenção`;
+}
+function render() {
+  const c=cameras[state.cam];
+  $('temperaturaAtual').innerHTML=`${pt(c.temp)}<span class="card-unit">°C</span>`;
+  $('umidadeAtual').innerHTML=`${pt(c.humidity)}<span class="card-unit">%</span>`;
+  $('tempoIdeal').innerHTML=`${c.ideal}<span class="card-unit">%</span>`;
+  $('progressoIdeal').style.width=`${c.ideal}%`;
+  for(const [key,value,range] of [['temperaturaBadge',c.temp,c.tempIdeal],['umidadeBadge',c.humidity,c.humIdeal]]) {
+    const ok=value>=range[0]&&value<=range[1];
+    $(key).textContent=ok?'✓ Dentro da faixa':'! Fora da faixa';
+    $(key).className=`dashboard-badge ${ok?'dashboard-ok':'dashboard-bad'}`;
+  }
+  chartTemperature?.destroy();chartHumidity?.destroy();
+  chartTemperature=lineChart('graficoTemperatura',gerarSerie(state.cam,state.hours,'temp'),'#173f73',7.5,13.0,c.tempIdeal,state.hours);
+  chartHumidity=lineChart('graficoUmidade',gerarSerie(state.cam,state.hours,'humidity'),'#209598',80,100,c.humIdeal,state.hours);
+  renderAlerts();
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  $('camaraSelect').addEventListener('change',e=>{state.cam=Number(e.target.value);render()});
+  $('periodoSelect').addEventListener('change',e=>{state.hours=Number(e.target.value);render()});
+  document.querySelector('.menu-sidebar-toggle').addEventListener('click',()=>{
+    const isOpen=$('sidebar').classList.toggle('open');
+    document.querySelector('.menu-sidebar-toggle').setAttribute('aria-expanded',String(isOpen));
+  });
+  document.querySelectorAll('[data-demo-link]').forEach(el=>el.addEventListener('click',e=>e.preventDefault()));
+  if(typeof Chart!=='undefined') {chartCompliance=complianceChart();render();}
+  else {document.querySelector('.dashboard-demo-notice').textContent='Não foi possível carregar a biblioteca de gráficos. Verifique a conexão com a internet.';}
+});

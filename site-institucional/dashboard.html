@@ -1,402 +1,45 @@
-<!DOCTYPE html>
-<html lang="ptBR">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Monitoramento da Maturação</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Blue Cheese</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  <script src="./js/dashboard.js" defer></script>
 </head>
-
-<body>
-
-    <main class="dashboard">
-        <header class="dashboard-header">
-            <div class="dashboard-title">
-                <h1>Monitoramento da Temperatura e Umidade da Maturação</h1>
-            </div>
-
-            <div class="dashboard-controls">
-
-                <div class="dashboard-status">
-                    <span></span>
-                    Última leitura 20:56
-                </div>
-
-                <label>
-                    Câmara
-                    <select id="camaraSelect">
-                        <option>Câmara de Maturação 1</option>
-                        <option>Câmara de Maturação 2</option>
-                        <option>Câmara de Maturação 3</option>
-                    </select>
-                </label>
-
-                <label>
-                    Período
-                    <select id="periodoSelect">
-                        <option>Últimas 24 h</option>
-                        <option>Últimas 12 h</option>
-                        <option>Últimas 7 dias</option>
-                    </select>
-                </label>
-                <button class="dashboard-sair">Sair →</button>
-            </div>
-        </header>
-
-        <section class="dashboard-cards">
-
-            <div class="dashboard-card">
-
-                <span class="dashboard-card-label">
-                    TEMPERATURA ATUAL
-                </span>
-
-                <strong id="temperaturaAtual">
-                    8,9°
-                </strong>
-
-                <small>
-                    Ideal 8 a 12 °C
-                </small>
-
-                <span class="dashboard-badge dashboard-ok">
-                    ✓ Dentro da faixa
-                </span>
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <span class="dashboard-card-label">
-                    UMIDADE ATUAL
-                </span>
-
-                <strong id="umidadeAtual">
-                    92,7%
-                </strong>
-
-                <small>
-                    Ideal 90 a 98%
-                </small>
-
-                <span class="dashboard-badge dashboard-ok">
-                    ✓ Dentro da faixa
-                </span>
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <span class="dashboard-card-label">
-                    TEMPO NA FAIXA IDEAL
-                </span>
-
-                <strong>
-                    94<span class="dashboard-percent">%</span>
-                </strong>
-
-                <small>
-                    Temp. e umidade simultâneas
-                </small>
-
-                <div class="dashboard-progress">
-                    <div style="width: 94%"></div>
-                </div>
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <span class="dashboard-card-label">
-                    ALERTAS NO PERÍODO
-                </span>
-
-                <strong>
-                    11
-                </strong>
-
-                <small>
-                    1 crítico(s) · 10 atenção
-                </small>
-
-            </div>
-
-        </section>
-
-        <section class="dashboard-grid">
-
-            <div class="dashboard-panel dashboard-chart-large">
-
-                <div class="dashboard-panel-header">
-
-                    <h2>
-                        Temperatura em Celsius no Tempo da Maturação
-                    </h2>
-
-                    <span>
-                        Faixa sombreada = intervalo ideal da fase
-                    </span>
-
-                </div>
-
-                <div class="dashboard-chart-container">
-                    <canvas id="temperaturaChart"></canvas>
-                </div>
-
-            </div>
-
-
-            <div class="dashboard-panel">
-
-                <div class="dashboard-panel-header">
-
-                    <h2>
-                        Conformidade por câmara
-                    </h2>
-
-                    <span>
-                        % do período dentro da faixa
-                    </span>
-
-                </div>
-
-                <div class="dashboard-legend">
-                    <span>
-                        <i class="legend-temperature"></i>
-                        Temperatura
-                    </span>
-
-                    <span>
-                        <i class="legend-humidity"></i>
-                        Umidade
-                    </span>
-                </div>
-
-                <div class="dashboard-chart-container dashboard-bar-container">
-                    <canvas id="conformidadeChart"></canvas>
-                </div>
-
-            </div>
-
-        </section>
-
-        <section class="dashboard-grid">
-
-            <div class="dashboard-panel dashboard-chart-large">
-
-                <div class="dashboard-panel-header">
-
-                    <h2>
-                        Umidade Relativa em Porcentagem no Tempo da Maturação
-                    </h2>
-
-                    <span>
-                        Faixa sombreada = intervalo ideal da fase
-                    </span>
-
-                </div>
-
-                <div class="dashboard-chart-container">
-                    <canvas id="umidadeChart"></canvas>
-                </div>
-
-            </div>
-
-
-            <!-- ALERTAS -->
-            <div class="dashboard-panel dashboard-alert-panel">
-
-                <div class="dashboard-panel-header">
-
-                    <h2>
-                        Alertas recentes
-                    </h2>
-
-                    <span>
-                        4/5 sensores ativos
-                    </span>
-
-                </div>
-
-                <div id="alertasLista" class="dashboard-alertas">
-
-                    <div class="dashboard-alert dashboard-critical">
-
-                        <span class="alert-type">
-                            X Crítico
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 3 · Temperatura 8,1 °C
-                            <small>(ideal 6–8 °C)</small>
-                        </span>
-
-                        <time>
-                            01/10, 18:11
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 3 · Umidade 81,2%
-                            <small>(ideal 83–87%)</small>
-                        </span>
-
-                        <time>
-                            01/10, 18:11
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 3 · Temperatura 8,3 °C
-                            <small>(ideal 6–8 °C)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:56
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 3 · Umidade 81,5%
-                            <small>(ideal 83–87%)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:56
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 1 · Umidade 86,1%
-                            <small>(ideal 90–98%)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:41
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 3 · Temperatura 8,2 °C
-                            <small>(ideal 6–8 °C)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:41
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 3 · Umidade 80,9%
-                            <small>(ideal 83–87%)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:41
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 1 · Temperatura 12,1 °C
-                            <small>(ideal 8–12 °C)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:26
-                        </time>
-
-                    </div>
-
-
-                    <div class="dashboard-alert dashboard-warning">
-
-                        <span class="alert-type">
-                            ! Atenção
-                        </span>
-
-                        <span class="alert-description">
-                            Câmara 1 · Umidade 87,1%
-                            <small>(ideal 90–98%)</small>
-                        </span>
-
-                        <time>
-                            01/10, 17:26
-                        </time>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <script src="./js/dashboard.js"></script>
-
+<body class="dashboard-page">
+  <aside class="dashboard-sidebar" id="sidebar">
+    <a class="sidebar-brand" href="./index.html" aria-label="Blue Cheese - página inicial"><img src="./assets/LogoBlueCheese.png" alt="Blue Cheese" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><span hidden>BLUE<br>CHEESE</span></a>
+    <nav class="sidebar-nav" aria-label="Navegação principal">
+      <a href="./dashboard.html" class="active" aria-current="page">Dashboard</a>
+      <a href="#locais" data-demo-link>Meus Locais</a>
+      <a href="#acessos" data-demo-link>Acessos</a>
+    </nav>
+    <div class="sidebar-account"><div class="sidebar-user"><span class="sidebar-avatar">MA</span><strong>Marcos Almeida</strong></div><a href="./index.html">Sair</a></div>
+  </aside>
+  <main class="dashboard" id="conteudo">
+    <header class="dashboard-header">
+      <div class="dashboard-title"><button class="menu-sidebar-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">☰</button><h1>Monitoramento da Temperatura e Umidade da Maturação</h1></div>
+      <div class="dashboard-controls">
+        <div class="dashboard-status"><span></span> Última leitura <time id="ultimaLeitura">20:56</time></div>
+        <label>Câmara <select id="camaraSelect"><option value="1">Câmara de Maturação 1</option><option value="2">Câmara de Maturação 2</option><option value="3">Câmara de Maturação 3</option></select></label>
+        <label>Período <select id="periodoSelect"><option value="24">Últimas 24 h</option><option value="12">Últimas 12 h</option><option value="6">Últimas 6 h</option></select></label>
+      </div>
+    </header>
+    <section class="dashboard-cards" aria-label="Indicadores da maturação">
+      <article class="dashboard-card"><span class="dashboard-card-label">TEMPERATURA ATUAL</span><strong id="temperaturaAtual">8,9<span class="card-unit">°C</span></strong><small>Ideal 8 a 12 °C</small><span class="dashboard-badge dashboard-ok" id="temperaturaBadge">✓ Dentro da faixa</span></article>
+      <article class="dashboard-card"><span class="dashboard-card-label">UMIDADE ATUAL</span><strong id="umidadeAtual">92,7<span class="card-unit">%</span></strong><small>Ideal 90 a 98%</small><span class="dashboard-badge dashboard-ok" id="umidadeBadge">✓ Dentro da faixa</span></article>
+      <article class="dashboard-card"><span class="dashboard-card-label">TEMPO NA FAIXA IDEAL</span><strong id="tempoIdeal">94<span class="card-unit">%</span></strong><small>Temp. e umidade simultâneas</small><div class="dashboard-progress"><div id="progressoIdeal" style="width:94%"></div></div></article>
+      <article class="dashboard-card"><span class="dashboard-card-label">ALERTAS NO PERÍODO</span><strong id="totalAlertas">11</strong><small id="resumoAlertas">1 crítico(s) · 10 atenção</small></article>
+    </section>
+    <div class="dashboard-grid">
+      <section class="dashboard-panel"><div class="dashboard-panel-header"><h2>Temperatura em Celsius no Tempo da Maturação</h2><span>Faixa sombreada = intervalo ideal da fase</span></div><div class="dashboard-chart-container"><canvas id="graficoTemperatura" role="img" aria-label="Gráfico de temperatura ao longo do tempo"></canvas></div></section>
+      <section class="dashboard-panel"><div class="dashboard-panel-header"><h2>Conformidade por câmara</h2><span>% do período dentro da faixa</span></div><div class="dashboard-legend"><span><i class="legend-temperature"></i>Temperatura</span><span><i class="legend-humidity"></i>Umidade</span></div><div class="dashboard-chart-container dashboard-bar-container"><canvas id="graficoConformidade" role="img" aria-label="Gráfico de conformidade das três câmaras"></canvas></div></section>
+      <section class="dashboard-panel"><div class="dashboard-panel-header"><h2>Umidade Relativa em Porcentagem no Tempo da Maturação</h2><span>Faixa sombreada = intervalo ideal da fase</span></div><div class="dashboard-chart-container"><canvas id="graficoUmidade" role="img" aria-label="Gráfico de umidade ao longo do tempo"></canvas></div></section>
+      <section class="dashboard-panel dashboard-alert-panel"><div class="dashboard-panel-header"><h2>Alertas recentes</h2><span>4/5 sensores ativos</span></div><div class="dashboard-alertas" id="listaAlertas" aria-live="polite"></div></section>
+    </div>
+    <p class="dashboard-demo-notice">Dados ilustrativos para demonstrar a interface. Conecte sua API para exibir leituras reais.</p>
+  </main>
 </body>
 </html>
