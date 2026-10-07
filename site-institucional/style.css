@@ -1101,3 +1101,86 @@
   .dashboard-page .dashboard-alert { grid-template-columns:62px 1fr; }
   .dashboard-page .dashboard-alert time { display:none; }
 }
+
+/* ===== Dashboard em tela única (desktop) ===== */
+@media (min-width: 1051px) {
+  body.dashboard-page {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .dashboard-page .dashboard {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    gap: clamp(8px, 1vh, 13px);
+    padding: clamp(12px, 1.8vh, 22px) clamp(16px, 2vw, 40px) 8px;
+    overflow: hidden;
+  }
+
+  .dashboard-page .dashboard-header,
+  .dashboard-page .dashboard-cards,
+  .dashboard-page .dashboard-grid,
+  .dashboard-page .dashboard-demo-notice {
+    margin: 0;
+  }
+
+  .dashboard-page .dashboard-title h1 {
+    font-size: clamp(20px, 1.7vw, 29px);
+  }
+
+  .dashboard-page .dashboard-cards {
+    min-height: 0;
+  }
+
+  .dashboard-page .dashboard-card {
+    min-height: 0;
+    padding: clamp(9px, 1.2vh, 14px) 14px;
+  }
+
+  .dashboard-page .dashboard-grid {
+    min-height: 0;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-page .dashboard-panel {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 10px 12px 7px;
+  }
+
+  .dashboard-page .dashboard-chart-container,
+  .dashboard-page .dashboard-bar-container {
+    height: auto;
+    min-height: 0;
+    flex: 1 1 0;
+  }
+
+  .dashboard-page .dashboard-chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .dashboard-page .dashboard-alertas {
+    flex: 1 1 0;
+    height: auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .dashboard-page .dashboard-demo-notice {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+}
+
+/* Telas pequenas mantêm rolagem para não esconder os gráficos. */
+@media (max-width: 1050px) {
+  body.dashboard-page { height: auto; overflow-y: auto; }
+}
