@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acessos | Blue Cheese</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./js/acessos.js" defer></script>
+</head>
+<body class="dashboard-page acessos-page">
+  <aside class="dashboard-sidebar" id="sidebar">
+    <a class="sidebar-brand" href="./index.html" aria-label="Blue Cheese - página inicial"><img src="./assets/LogoBlueCheese.png" alt="Blue Cheese"></a>
+    <nav class="sidebar-nav" aria-label="Navegação principal">
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./meus-locais.html">Meus locais</a>
+      <a href="./acessos.html" class="active" aria-current="page">Acessos</a>
+    </nav>
+    <div class="sidebar-account"><div class="sidebar-user"><span class="sidebar-avatar">MA</span><strong>Marcos Almeida</strong></div><a href="./index.html">Sair</a></div>
+  </aside>
+  <main class="acessos-main" id="conteudo">
+    <div class="acessos-inner">
+      <header class="acessos-header">
+        <div class="acessos-heading"><button class="menu-sidebar-toggle" id="menuToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Abrir menu">☰</button><h1>Acessos</h1></div>
+        <button type="button" class="acessos-btn primary" id="novoLogin">+ Novo login</button>
+      </header>
+      <section class="acessos-lista" aria-label="Logins cadastrados" id="listaLogins"></section>
+    </div>
+  </main>
+  <dialog id="acessosDialog" class="acessos-dialog" aria-labelledby="acessosDialogTitle">
+    <form id="acessosForm" autocomplete="off">
+      <div class="acessos-dialog-header"><h2 id="acessosDialogTitle">Novo login</h2><button type="button" id="fecharAcessos" class="acessos-x" aria-label="Fechar janela">×</button></div>
+      <label class="acessos-field">Login<input id="campoLogin" name="login" placeholder="sala.maturacao" maxlength="60" required autocomplete="off"></label>
+      <div class="acessos-input-row">
+        <label class="acessos-field"><span id="senhaLabel">Senha</span><input id="campoSenha" name="senha" type="password" minlength="8" placeholder="••••••••" autocomplete="new-password"></label>
+        <label class="acessos-field">Confirmar senha<input id="confirmarSenha" name="confirmarSenha" type="password" minlength="8" placeholder="••••••••" autocomplete="new-password"></label>
+      </div>
+      <p class="acessos-help" id="senhaHelp" hidden>Deixe a senha em branco para manter a atual.</p>
+      <p class="acessos-error" id="erroAcessos" role="alert" hidden></p>
+      <div class="acessos-dialog-footer">
+        <button type="button" class="acessos-excluir" id="excluirLogin" hidden>Excluir login</button>
+        <div class="acessos-footer-actions"><button type="button" class="acessos-btn secondary" id="cancelarAcessos">Cancelar</button><button type="submit" class="acessos-btn primary" id="salvarLogin">Criar login</button></div>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
