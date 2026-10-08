@@ -15,14 +15,14 @@ create table empresa (
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(50),
 cnpj varchar(25),
-responsavelLocal varchar(50),
-pagamento decimal(10,2)
+fkCliente int not null,
+	constraint fkEmpresa_cliente foreign key (fkCliente) references cliente(idCliente)
 );
 
-insert into empresa (nomeFantasia, cnpj, responsavelLocal, pagamento) values
-('Laticínios Serra Azul', '12.345.678/0001-90', 'Marcos Almeida', 4500.00),
-('Queijaria Veia Azul', '23.456.789/0001-01', 'Fernanda Souza', 3200.50),
-('Maturação Gorgonzola Mineira', '34.567.890/0001-12', 'Ricardo Teixeira', 5800.00);
+insert into empresa (nomeFantasia, cnpj, responsavelLocal, fkCliente) values
+('Queijaria Serra Azul', '12.345.678/0001-90', 'Marcos Almeida', 1),
+('Laticínios Vale Verde', '23.456.789/0001-01', 'Carlos Pereira', 2),
+('Fazenda Azul Gourmet', '34.567.890/0001-12', 'Juliana Prado', 3);
 
 create table endereco (
 idEndereco int primary key auto_increment,
@@ -32,98 +32,99 @@ bairro varchar(50),
 cidade varchar(50),
 estado char(2),
 cep char(8),
-fkEmpresa int not null unique,
+fkEmpresa int not null,
 	constraint fkEndereco_empresa foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
 insert into endereco (logradouro, numero, bairro, cidade, estado, cep, fkEmpresa) values
-('Rua das Acácias', '120', 'Centro', 'Serro', 'MG', '39150000', 1),
-('Estrada do Queijo Artesanal', '51', 'Zona Rural', 'Araxá', 'MG', '38183000', 2),
-('Avenida Tiradentes', '845', 'Vila Nova', 'Poços de Caldas', 'MG', '37701000', 3);
+('Estrada do Queijo', '1500', 'Zona Rural', 'Cunha', 'SP', '12530000', 1),
+('Rua das Acácias', '230', 'Centro', 'Poços de Caldas', 'MG', '37701000', 2),
+('Rodovia SP-340 km 12', 's/n', 'Zona Rural', 'Mogi Mirim', 'SP', '13800000', 3);
 
 create table cliente (
 idCliente int primary key auto_increment,
 nome varchar(60),
 cpf varchar(45),
 email varchar(100),
-	constraint chkEmail check (email like'%'),
-numeroCelular char(11),
-fkEmpresa int,
-	constraint fkCliente_empresa foreign key (fkEmpresa) references empresa(idEmpresa),
-fkSupervisor int,
-	constraint fkCliente_supervisor foreign key (fkSupervisor) references cliente(idCliente),
-fkUsuario int,
-	constraint fkCliente_Usuario foreign key (fkUsuario) references usuario(idUsuario)
+	constraint chkEmail check (email like'%@%'),
+numeroCelular char(11)
 );
 
-insert into cliente (nome, cpf, email, numeroCelular, fkEmpresa, fkSupervisor, fkUsuario) values
-('Marcos Almeida', '123.456.789-01', 'marcos.almeida@serraazul.com.br', '31987654321', 1, null, null),
-('Fernanda Souza', '234.567.890-12', 'fernanda.souza@veiaazul.com.br', '34991234567', 2, 1, null),
-('Ricardo Teixeira', '345.678.901-23', 'ricardo.teixeira@gorgonzolamineira.com.br', '35998765432', 3, 1, null);
+insert into cliente (nome, cpf, email, numeroCelular) values
+('Marcos Almeida', '123.456.789-01', 'marcos.almeida@queijariaserra.com.br', '11987654321'),
+('Fernanda Souza', '234.567.890-12', 'fernanda@laticiniosvale.com.br', '11976543210'),
+('Rafael Moreira', '345.678.901-23', 'rafael.moreira@fazendaazul.com.br', '19965432109');
 
-select * from cliente;
 create table ambienteProcesso (
 idAmbienteProcesso int primary key auto_increment,
 nomePrincipal varchar(45),
 nomeAuxiliar varchar(45),
 descricao varchar(45),
-fkEmpresa int,
+temperaturaMin decimal(6,2),
+temperaturaMax decimal(6,2),
+umidadeMin int,
+umidadeMax int,
+fkEmpresa int not null,
 	constraint fkAmbienteProcesso_empresa foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
-insert into ambienteProcesso (nomePrincipal, nomeAuxiliar, descricao, fkEmpresa) values
-('Sala de Maturação 1', 'Câmara Fria A', 'Maturação de queijo azul, 10 a 12 °C', 1),
-('Sala de Maturação 2', 'Câmara Úmida B', 'Alta umidade, cerca de 90% de UR', 2),
-('Sala de Cura Gorgonzola', 'Adega Principal', 'Controle de temperatura e umidade da cura', 3);
+insert into ambienteProcesso (nomePrincipal, nomeAuxiliar, descricao, temperaturaMin, temperaturaMax, umidadeMin, umidadeMax, fkEmpresa) values
+('Câmara de Maturação 1', 'Câmara A', 'Maturação de Gorgonzola', 8.00, 12.00, 85, 95, 1),
+('Câmara de Maturação 2', 'Câmara B', 'Maturação de Roquefort', 6.00, 10.00, 90, 98, 2),
+('Câmara de Maturação 3', 'Câmara C', 'Salga dos queijos azuis', 10.00, 14.00, 75, 85, 3);
 
 create table usuario (
 idUsuario int primary key auto_increment,
 login varchar(45),
-senha varchar(45)
+senha varchar(45),
+fkCliente int not null,
+	constraint fkUsuario_cliente foreign key (fkCliente) references cliente(idCliente),
+primary key (idUsuario,fkCliente)
 );
 
-insert into usuario (login, senha) values
-('marcos.almeida', 'Marcos@2026'),
-('fernanda.souza', 'Fernanda@2026'),
-('ricardo.teixeira', 'Ricardo@2026');
+insert into usuario (login, senha, fkCliente) values
+('marcos.almeida', 'Senha@123', 1),
+('fernanda.souza', 'Senha@456', 2),
+('rafael.moreira', 'Senha@789', 3);
 
 create table sensor (
 idSensor int primary key auto_increment,
 nome varchar(45),
-descricao varchar(100),
-unidadeMedicao varchar(10)
+descricao varchar(100)
 );
 
-insert into sensor (nome, descricao, unidadeMedicao) values
-('DHT11', 'Sensor de temperatura da sala de maturação', '°C'),
-('DHT11', 'Sensor de umidade relativa do ar da sala de maturação', 'UR%');
+insert into sensor (nome, descricao) values
+('DHT11', 'Sensor de umidade e temperatura'),
+('DHT11', 'Sensor de umidade e temperatura'),
+('DHT11',  'Sensor analógico de temperatura');
 
 create table sensorAmbiente (
-idSensorAmbiente int primary key auto_increment,
-statuss tinyint,
-	constraint chkStatuss check (statuss in ('1','0')),
-fkAmbienteProcesso int,
+idSensorAmbiente int auto_increment,
+fkAmbienteProcesso int not null,
 	constraint fkSensorAmbiente_ambienteProcesso foreign key (fkAmbienteProcesso) references ambienteProcesso(idAmbienteProcesso),
-fkSensor int,
-	constraint fkSensorAmbiente_sensor foreign key (fkSensor) references sensor(idSensor)
+fkSensor int not null,
+	constraint fkSensorAmbiente_sensor foreign key (fkSensor) references sensor(idSensor),
+primary key (idSensorAmbiente,fkAmbienteProcesso)
 );
 
-insert into sensorAmbiente (statuss, fkAmbienteProcesso, fkSensor) values
-(1, 1, 1),
-(1, 1, 2),
-(0, 2, 3);
+insert into sensorAmbiente (fkAmbienteProcesso, fkSensor) values
+(1, 1),
+(2, 2),
+(3, 3);
 
 create table leituraSensor (
-idLeituraSensor int primary key auto_increment,
-valor decimal(10,2),
-dataHora datetime,
-fkSensorAmbiente int,
+idLeituraSensor int auto_increment,
+sensorUmidade float,
+sensorTemperatura float,
+dataHora timestamp default current_timestamp,
+fkSensorAmbiente int not null,
 	constraint fkLeituraSensor_SensorAmbiente foreign key (fkSensorAmbiente) references sensorAmbiente(idSensorAmbiente),
-fkAmbienteProcesso int,
-	constraint fkLeituraSensor_ambienteProcesso foreign key (fkAmbienteProcesso) references ambienteProcesso(idAmbienteProcesso)
+fkAmbienteProcesso int not null,
+	constraint fkLeituraSensor_ambienteProcesso foreign key (fkAmbienteProcesso) references ambienteProcesso(idAmbienteProcesso),
+primary key (idLeituraSensor,fkSensorAmbiente,fkAmbienteProcesso)
 );
 
-insert into leituraSensor (valor, dataHora, fkSensorAmbiente, fkAmbienteProcesso) values
-(11.50, '2026-10-02 08:00:00', 1, 1),
-(88.00, '2026-10-02 08:00:00', 2, 1),
-(12.20, '2026-10-02 08:05:00', 1, 1);
+insert into leituraSensor (sensorUmidade, sensorTemperatura, fkSensorAmbiente, fkAmbienteProcesso) values
+(88.5, 10.2, 1, 1),
+(92.1,  8.7, 2, 2),
+(79.8, 12.4, 3, 3);
