@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meus locais | Blue Cheese</title>
+  <link rel="shortcut icon" href="./assets/LogoBlueCheese.png" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./js/meus-locais.js"></script>
+</head>
+<body class="dashboard-page locais-page">
+  <aside class="dashboard-sidebar" id="sidebar">
+    <a class="sidebar-brand" href="./index.html" aria-label="Blue Cheese - página inicial"><img src="./assets/LogoBlueCheese.png" alt="Blue Cheese" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden>BLUE<br>CHEESE</span></a>
+    <nav class="sidebar-nav" aria-label="Navegação principal">
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./meus-locais.html" class="active" aria-current="page">Meus locais</a>
+      <a href="./acessos.html">Acessos</a>
+    </nav>
+    <div class="sidebar-account"><div class="sidebar-user"><span class="sidebar-avatar">MA</span><strong>Marcos Almeida</strong></div><a href="./index.html">Sair</a></div>
+  </aside>
+  <main class="locais-main" id="conteudo">
+    <div class="locais-inner">
+      <header class="locais-header">
+        <div class="locais-heading"><button type="button" class="menu-sidebar-toggle" id="menuToggle" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu">☰</button><h1>Meus locais</h1></div>
+        <button type="button" class="locais-button primary" data-action="add-company">+ Nova empresa</button>
+      </header>
+      <div id="empresas" aria-live="polite"></div>
+    </div>
+  </main>
+  <dialog id="editorDialog" class="locais-dialog" aria-labelledby="dialogTitle">
+    <form id="editorForm" class="locais-form">
+      <div class="dialog-header"><h2 id="dialogTitle">Adicionar empresa</h2><button type="button" class="dialog-close" id="closeDialog" aria-label="Fechar">×</button></div>
+      <div id="dialogFields"></div>
+      <div class="dialog-actions"><button type="button" class="locais-button outlined" id="cancelDialog">Cancelar</button><button type="submit" class="locais-button primary">Salvar</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

@@ -931,3 +931,58 @@ footer {
   font-size: 10px;
   color: #73859a;
 }
+
+/* =====================================================
+   MEUS LOCAIS — escopo isolado para não alterar dashboard
+   ===================================================== */
+.locais-page { --sidebar-width:210px; height:auto; min-height:100vh; overflow-x:hidden; overflow-y:auto; background:var(--bg); }
+.locais-page .dashboard-sidebar { width:var(--sidebar-width); }
+.locais-page .locais-main { margin-left:var(--sidebar-width); min-height:100vh; padding:43px 40px 55px; }
+.locais-page .locais-inner { width:min(100%, 1030px); }
+.locais-header { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:30px; }
+.locais-heading { display:flex; align-items:center; gap:12px; }
+.locais-header h1 { margin:0; color:#193553; font-family:Georgia,"Times New Roman",serif; font-size:36px; line-height:1.2; font-weight:400; }
+.locais-button { display:inline-flex; justify-content:center; align-items:center; gap:5px; border-radius:24px; padding:10px 17px; min-height:37px; font-size:12px; line-height:1; font-weight:700; white-space:nowrap; cursor:pointer; transition:background .18s,transform .18s; }
+.locais-button:hover { transform:translateY(-1px); }
+.locais-button.primary { border:1px solid #173f73; background:#173f73; color:white; }
+.locais-button.primary:hover { background:#0f325f; }
+.locais-button.outlined { background:white; border:1px solid #173f73; color:#173f73; }
+.locais-button.outlined:hover { background:#eef4fc; }
+.locais-company { margin-bottom:34px; }
+.locais-company-heading { display:flex; align-items:center; justify-content:space-between; gap:15px; border-bottom:1px solid #dfd6cb; padding-bottom:14px; margin-bottom:14px; }
+.locais-company-heading h2 { margin:0 0 2px; font-family:Georgia,"Times New Roman",serif; font-size:22px; font-weight:400; color:#173553; }
+.locais-company-heading p { margin:0; font-size:11px; color:#6b8298; }
+.locais-company-actions { display:flex; align-items:center; gap:18px; }
+.locais-link { border:0; background:transparent; color:#376ca5; font-size:11px; font-weight:700; cursor:pointer; padding:4px 0; white-space:nowrap; }
+.locais-link:hover { text-decoration:underline; }
+.locais-addresses { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.locais-address-card { display:flex; flex-direction:column; min-height:240px; min-width:0; background:#fff; border:1px solid #e4ddd3; border-radius:17px; padding:22px 22px 21px; box-shadow:0 5px 11px rgba(30,44,61,.07); }
+.locais-address-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+.locais-address-heading h3 { font-family:Georgia,"Times New Roman",serif; font-size:18px; font-weight:400; line-height:1.25; color:#183652; margin:0 0 5px; overflow-wrap:anywhere; }
+.locais-address-heading p { margin:0; font-size:12px; color:#6f8499; }
+.locais-divider { border-top:1px solid #e8e0d7; margin:17px 0 15px; }
+.locais-rooms { display:flex; flex-direction:column; gap:13px; margin:0 0 20px; padding:0; list-style:none; }
+.locais-rooms li { display:flex; align-items:center; gap:10px; color:#173f73; font-size:12px; }
+.locais-rooms li:before { content:""; width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:#d8c84b; }
+.locais-empty { color:#6f8499; font-size:12px; margin:0 0 20px; }
+.locais-add-room { width:100%; margin-top:auto; min-height:40px; border-radius:9px; border:1px dashed #bdd1e8; color:#173f73; font-size:11px; font-weight:700; background:transparent; cursor:pointer; }
+.locais-add-room:hover { background:#eff5fb; }
+.locais-no-companies { color:#6b8298; padding:25px 0; }
+.locais-dialog { padding:0; border:1px solid #e2d8cb; border-radius:19px; width:min(440px,calc(100vw - 28px)); max-height:90dvh; box-shadow:0 22px 65px #09224233; color:#173553; }
+.locais-dialog::backdrop { background:rgba(11,31,55,.45); }
+.locais-form { padding:25px; }
+.dialog-header { display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:19px; }
+.dialog-header h2 { font-family:Georgia,"Times New Roman",serif; font-size:24px; font-weight:400; margin:0; }
+.dialog-close { background:transparent; border:0; font-size:26px; cursor:pointer; color:#54708d; }
+.locais-field { display:flex; flex-direction:column; gap:6px; margin-bottom:15px; font-size:12px; font-weight:600; }
+.locais-field input { border:1px solid #d7dfe5; border-radius:8px; padding:12px; font:inherit; font-weight:400; min-width:0; color:#173553; }
+.locais-field input:focus { outline:2px solid #a6c4e0; outline-offset:1px; }
+.dialog-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:20px; }
+.locais-page .menu-sidebar-toggle { display:none; }
+@media (min-width:1500px) { .locais-page .locais-inner { max-width:1030px; } }
+@media (max-width:1100px) { .locais-page .locais-main { padding:38px 28px; } .locais-addresses { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:700px) { .locais-page .locais-main { margin-left:0; padding:22px 16px 45px; } .locais-page .dashboard-sidebar { width:230px; transform:translateX(-100%); transition:transform .25s ease; } .locais-page .dashboard-sidebar.open { transform:translateX(0); } .locais-page .menu-sidebar-toggle { display:block; } .locais-header h1 {font-size:30px;} .locais-company-heading { align-items:flex-start; flex-direction:column; } .locais-company-actions { gap:12px; } .locais-addresses { grid-template-columns:1fr; } .locais-address-card { min-height:215px; } }
+@media (max-width:390px) { .locais-header .locais-button {padding:10px;} .locais-header h1 {font-size:27px;} }
+
+/* Menu mobile: o botão só aparece na página Meus locais em telas pequenas. */
+@media (max-width:700px) { .locais-page .dashboard-sidebar { z-index:100; } }
