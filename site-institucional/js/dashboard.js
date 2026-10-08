@@ -1,8 +1,6 @@
-// Dashboard estático: os gráficos usam dados fixos (mockados)
-
 let horarios = ['22:00', '00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
 
-// Temperatura em °C (faixa ideal: 8 a 12)
+// Temperatura - 8 a 12
 new Chart(graficoTemperatura, {
   type: 'line',
   data: {
@@ -20,7 +18,7 @@ new Chart(graficoTemperatura, {
   }
 });
 
-// Umidade em % (faixa ideal: 90 a 98)
+// Umidade - 90 a 98
 new Chart(graficoUmidade, {
   type: 'line',
   data: {
@@ -38,7 +36,7 @@ new Chart(graficoUmidade, {
   }
 });
 
-// Conformidade por câmara (% do tempo dentro da faixa)
+// Conformidade por câmara % tempo dentro da faixa
 new Chart(graficoConformidade, {
   type: 'bar',
   data: {

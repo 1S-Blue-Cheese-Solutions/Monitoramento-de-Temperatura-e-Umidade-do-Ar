@@ -1,0 +1,109 @@
+function registrar() {
+    // Implementar mais tarde o envio do cadastro
+    let empresa = iempresa.value;
+    let cnpj = icnpj.value;
+    let cliente = icliente.value;
+    let cpf = icpf.value;
+    let email = imail.value;
+    let celular = icelular.value;
+    let flagError = false;
+
+    if(empresa == '') {
+        div_result_empresa.innerHTML=`Informe o nome da empresa`
+        flagError = true;
+    } else {
+        div_result_empresa.innerHTML=``
+    }
+
+    if(cnpj.length != 14 || cnpj.includes("-") || cnpj.includes(".")) {
+        div_result_cnpj.innerHTML=`CNPJ deve ter 14 números`
+        flagError = true;
+    } else {
+        div_result_cnpj.innerHTML=``
+    }
+
+    if(cliente == '') {
+        div_result_cliente.innerHTML=`Informe o seu nome`
+        flagError = true;
+    } else {
+        div_result_cliente.innerHTML=``
+    }
+
+    if(cpf.length != 11 || cnpj.includes("-") || cnpj.includes(".")) {
+        div_result_cpf.innerHTML=`CPF deve ter 11 números`
+        flagError = true;
+    } else {
+        div_result_cpf.innerHTML=``
+    }
+
+    if(email.includes('@') && email.includes('.com')) {
+        div_result_mail.innerHTML=``
+    } else {
+        div_result_mail.innerHTML=`Email deve conter @ e .com`
+        flagError = true;
+    }
+
+    if(celular.length != 11) {
+        div_result_celular.innerHTML=`Celular deve ter DDD + 9 números`
+        flagError = true;
+    } else {
+        div_result_celular.innerHTML=``
+    }
+
+    // VALIDAÇÃO DA SENHA
+    let senha = isenha.value;
+    let tamanhoSenha = senha.length;
+    let temMaiuscula = senha !== senha.toUpperCase();
+    let temMinuscula = senha !== senha.toLowerCase();
+
+    if(temMaiuscula && temMinuscula && tamanhoSenha >= 8) {
+        div_result_senha.innerHTML=``
+    } else if(temMaiuscula && temMinuscula) {
+        div_result_senha.innerHTML=`Senha deve ter mais que 8 caracteres`
+        flagError = true;
+    } else if(temMaiuscula && tamanhoSenha >= 8) {
+        div_result_senha.innerHTML=`Senha deve conter letra minuscula`
+        flagError = true;
+    }else if(temMinuscula && tamanhoSenha >= 8) {
+        div_result_senha.innerHTML=`Senha deve conter letra maiscula`
+        flagError = true;
+    } else if(tamanhoSenha >= 8){
+        div_result_senha.innerHTML=`Senha deve conter Maiuscula e minuscula`
+        flagError = true;
+    } else if(temMaiuscula) {
+        div_result_senha.innerHTML=`Senha deve ter mais que 8 caracteres <br> e conter minuscula`
+        flagError = true;
+    } else if(temMinuscula) {
+        div_result_senha.innerHTML=`Senha deve ter mais que 8 caracteres <br> e conter minuscula`
+        flagError = true;
+    } else if(tamanhoSenha == 0){
+        div_result_senha.innerHTML=`Informe uma senha`
+        flagError = true;
+    }
+
+    let contador = 0;
+    let contSimbolos = 0;
+    let simbolos = '!@#$%&*()_+-=[]{};:,.<>?/|~';
+
+    while (contador < senha.length) {
+        if (simbolos.includes(senha[contador])) {
+            contSimbolos++;
+        }
+        contador++;
+    }
+
+    if(flagError){
+        return
+    }
+
+}
+
+function verSenha() {
+    if (isenha.type == 'password') {
+        isenha.type = 'text';
+        btn_ver.innerHTML = 'OCULTAR';
+    } else {
+        isenha.type = 'password';
+        btn_ver.innerHTML = 'VER';
+    }
+}
