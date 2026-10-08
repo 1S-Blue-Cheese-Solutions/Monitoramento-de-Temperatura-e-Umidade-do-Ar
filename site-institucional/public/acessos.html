@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Acessos | Blue Cheese</title>
+  <link rel="shortcut icon" href="./assets/LogoBlueCheese.png" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Menu lateral -->
+  <div class="dashboard-sidebar">
+    <a class="sidebar-brand" href="./index.html">
+      <img src="./assets/LogoBlueCheese.png" alt="Blue Cheese">
+    </a>
+    <div class="sidebar-nav">
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./meus-locais.html">Meus locais</a>
+      <a href="./acessos.html" class="active">Acessos</a>
+    </div>
+    <div class="sidebar-account">
+      <div class="sidebar-user"><span class="sidebar-avatar">MA</span> Marcos Almeida</div>
+      <a href="./index.html">Sair</a>
+    </div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="locais">
+    <div class="locais-header">
+      <h1>Acessos</h1>
+      <button class="btn-azul" onclick="abrirNovoLogin()">+ Novo login</button>
+    </div>
+
+    <!-- Lista de logins -->
+    <div class="acessos-lista">
+      <div class="acesso">
+        <span class="acesso-avatar">M</span>
+        <b>marcos.almeida</b>
+        <span class="acesso-voce">Você</span>
+        <button class="btn-link" onclick="abrirEditarLogin('marcos.almeida')">Editar</button>
+      </div>
+      <div class="acesso">
+        <span class="acesso-avatar">S</span>
+        <b>sala.maturacao</b>
+        <button class="btn-link" onclick="abrirEditarLogin('sala.maturacao')">Editar</button>
+      </div>
+      <div class="acesso">
+        <span class="acesso-avatar">Q</span>
+        <b>qualidade.serra</b>
+        <button class="btn-link" onclick="abrirEditarLogin('qualidade.serra')">Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Novo login -->
+  <div class="popup-fundo" id="popup_novo_login">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Novo login</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <p class="popup-label">Login</p>
+      <input class="popup-input" id="input_login_novo" placeholder="sala.maturacao">
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Senha</p>
+          <input class="popup-input" id="input_senha_novo" type="password" placeholder="••••••••">
+        </div>
+        <div>
+          <p class="popup-label">Confirmar senha</p>
+          <input class="popup-input" id="input_confirmar_novo" type="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <div class="popup-msg" id="div_msg_novo"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="criarLogin()">Criar login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Editar login -->
+  <div class="popup-fundo" id="popup_editar_login">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Editar login</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <p class="popup-label">Login</p>
+      <input class="popup-input" id="input_login_editar">
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Nova senha</p>
+          <input class="popup-input" id="input_senha_editar" type="password" placeholder="••••••••">
+        </div>
+        <div>
+          <p class="popup-label">Confirmar senha</p>
+          <input class="popup-input" id="input_confirmar_editar" type="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <p class="acesso-ajuda">Deixe a senha em branco para manter a atual.</p>
+      <div class="popup-msg" id="div_msg_editar"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-vermelho" id="btn_excluir" onclick="fecharPopups()">Excluir login</button>
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="salvarLogin()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/acessos.js"></script>
+</body>
+</html>

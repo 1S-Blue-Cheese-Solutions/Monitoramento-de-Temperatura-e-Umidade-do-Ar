@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meus locais | Blue Cheese</title>
+  <link rel="shortcut icon" href="./assets/LogoBlueCheese.png" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Menu lateral -->
+  <div class="dashboard-sidebar">
+    <a class="sidebar-brand" href="./index.html">
+      <img src="./assets/LogoBlueCheese.png" alt="Blue Cheese">
+    </a>
+    <div class="sidebar-nav">
+      <a href="./dashboard.html">Dashboard</a>
+      <a href="./meus-locais.html" class="active">Meus locais</a>
+      <a href="./acessos.html">Acessos</a>
+    </div>
+    <div class="sidebar-account">
+      <div class="sidebar-user"><span class="sidebar-avatar">MA</span> Marcos Almeida</div>
+      <a href="./index.html">Sair</a>
+    </div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="locais">
+    <div class="locais-header">
+      <h1>Meus locais</h1>
+      <button class="btn-azul" onclick="abrirNovaEmpresa()">+ Nova empresa</button>
+    </div>
+
+    <!-- Empresa 1 -->
+    <div class="empresa-header">
+      <div>
+        <h2>Laticínios Serra Azul</h2>
+        <p>CNPJ 12.345.678/0001-90</p>
+      </div>
+      <div>
+        <button class="btn-link" onclick="abrirEditarEmpresa('Laticínios Serra Azul', '12345678000190')">Editar empresa</button>
+        <button class="btn-branco" onclick="abrirNovoEndereco('Laticínios Serra Azul')">+ Novo endereço</button>
+      </div>
+    </div>
+
+    <div class="enderecos">
+      <div class="endereco-card">
+        <div class="endereco-header">
+          <div>
+            <h3>Rua das Acácias, 120</h3>
+            <p>Serro - MG</p>
+          </div>
+          <button class="btn-link" onclick="abrirNovoEndereco('Laticínios Serra Azul')">Editar</button>
+        </div>
+        <p class="ambiente"><span class="bolinha">●</span> Sala de Maturação 1</p>
+        <p class="ambiente"><span class="bolinha">●</span> Sala de Maturação 2</p>
+        <button class="btn-tracejado" onclick="abrirAmbientes('Rua das Acácias, 120 · Serro - MG', ['Sala de Maturação 1', 'Sala de Maturação 2'])">+ Adicionar ambiente</button>
+      </div>
+
+      <div class="endereco-card">
+        <div class="endereco-header">
+          <div>
+            <h3>Avenida Tiradentes, 845</h3>
+            <p>Poços de Caldas - MG</p>
+          </div>
+          <button class="btn-link" onclick="abrirNovoEndereco('Laticínios Serra Azul')">Editar</button>
+        </div>
+        <p class="vazio">Nenhum ambiente cadastrado.</p>
+        <button class="btn-tracejado" onclick="abrirAmbientes('Avenida Tiradentes, 845 · Poços de Caldas - MG', [])">+ Adicionar ambiente</button>
+      </div>
+    </div>
+
+    <!-- Empresa 2 -->
+    <div class="empresa-header">
+      <div>
+        <h2>Queijaria Veia Azul</h2>
+        <p>CNPJ 23.456.789/0001-01</p>
+      </div>
+      <div>
+        <button class="btn-link" onclick="abrirEditarEmpresa('Queijaria Veia Azul', '23456789000101')">Editar empresa</button>
+        <button class="btn-branco" onclick="abrirNovoEndereco('Queijaria Veia Azul')">+ Novo endereço</button>
+      </div>
+    </div>
+
+    <div class="enderecos">
+      <div class="endereco-card">
+        <div class="endereco-header">
+          <div>
+            <h3>Estrada do Queijo Artesanal, 51</h3>
+            <p>Araxá - MG</p>
+          </div>
+          <button class="btn-link" onclick="abrirNovoEndereco('Queijaria Veia Azul')">Editar</button>
+        </div>
+        <p class="ambiente"><span class="bolinha">●</span> Sala de Cura Gorgonzola</p>
+        <button class="btn-tracejado" onclick="abrirAmbientes('Estrada do Queijo Artesanal, 51 · Araxá - MG', ['Sala de Cura Gorgonzola'])">+ Adicionar ambiente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Nova empresa -->
+  <div class="popup-fundo" id="popup_nova_empresa">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Nova empresa</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <p class="popup-label">Nome fantasia</p>
+      <input class="popup-input" id="input_nome_nova" placeholder="Queijaria Azul">
+
+      <p class="popup-label">CNPJ</p>
+      <input class="popup-input" id="input_cnpj_nova" placeholder="Somente números">
+
+      <div class="popup-msg" id="div_msg_nova"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="salvarNovaEmpresa()">Salvar empresa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Editar empresa -->
+  <div class="popup-fundo" id="popup_editar_empresa">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Editar empresa</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <p class="popup-label">Nome fantasia</p>
+      <input class="popup-input" id="input_nome_editar">
+
+      <p class="popup-label">CNPJ</p>
+      <input class="popup-input" id="input_cnpj_editar" placeholder="Somente números">
+
+      <div class="popup-msg" id="div_msg_editar"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-vermelho" onclick="fecharPopups()">Excluir empresa</button>
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="salvarEditarEmpresa()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Novo endereço -->
+  <div class="popup-fundo" id="popup_novo_endereco">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Novo endereço</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <div class="passos">
+        <span class="numero azul">1</span> <b>Endereço</b>
+        <hr>
+        <span class="numero">2</span> Ambientes
+      </div>
+
+      <div class="destaque" id="div_empresa_endereco"></div>
+
+      <div class="linha">
+        <div class="pequeno">
+          <p class="popup-label">CEP</p>
+          <input class="popup-input" id="input_cep" placeholder="00000000">
+        </div>
+        <div>
+          <p class="popup-label">Logradouro</p>
+          <input class="popup-input" id="input_logradouro" placeholder="Rua das Acácias">
+        </div>
+      </div>
+
+      <div class="linha">
+        <div class="pequeno">
+          <p class="popup-label">Número</p>
+          <input class="popup-input" id="input_numero" placeholder="120">
+        </div>
+        <div>
+          <p class="popup-label">Bairro</p>
+          <input class="popup-input" id="input_bairro" placeholder="Centro">
+        </div>
+      </div>
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Cidade</p>
+          <input class="popup-input" id="input_cidade" placeholder="Serro">
+        </div>
+        <div class="pequeno">
+          <p class="popup-label">Estado</p>
+          <input class="popup-input" id="input_estado" placeholder="MG">
+        </div>
+      </div>
+
+      <div class="popup-msg" id="div_msg_endereco"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="proximo()">Próximo →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Ambientes -->
+  <div class="popup-fundo" id="popup_ambientes">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Ambientes</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <div class="passos">
+        <span class="numero amarelo">✓</span> Endereço
+        <hr>
+        <span class="numero azul">2</span> <b>Ambientes</b>
+      </div>
+
+      <div class="destaque" id="div_endereco_ambientes"></div>
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Nome principal</p>
+          <input class="popup-input" id="input_nome_principal" placeholder="Sala de Maturação 3">
+        </div>
+        <div>
+          <p class="popup-label">Nome auxiliar</p>
+          <input class="popup-input" id="input_nome_auxiliar" placeholder="Câmara Fria C">
+        </div>
+      </div>
+
+      <p class="popup-label">Descrição</p>
+      <input class="popup-input" id="input_descricao" placeholder="Ex.: Gorgonzola, 8 a 10 °C">
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Temperatura mínima (°C)</p>
+          <input class="popup-input" id="input_temp_min" placeholder="8">
+        </div>
+        <div>
+          <p class="popup-label">Temperatura máxima (°C)</p>
+          <input class="popup-input" id="input_temp_max" placeholder="12">
+        </div>
+      </div>
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Umidade mínima (%)</p>
+          <input class="popup-input" id="input_umid_min" placeholder="90">
+        </div>
+        <div>
+          <p class="popup-label">Umidade máxima (%)</p>
+          <input class="popup-input" id="input_umid_max" placeholder="98">
+        </div>
+      </div>
+
+      <div class="popup-msg" id="div_msg_ambientes"></div>
+
+      <button class="btn-branco btn-inteiro" onclick="adicionarAmbiente()">+ Adicionar à lista</button>
+
+      <div id="div_lista"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-branco" onclick="fecharPopups()">Pular</button>
+        <button class="btn-azul" onclick="fecharPopups()">Concluir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/meus-locais.js"></script>
+</body>
+</html>
