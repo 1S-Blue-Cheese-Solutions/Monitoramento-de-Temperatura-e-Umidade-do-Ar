@@ -126,7 +126,6 @@ function verSenha() {
     var cpfVar = icpf.value;
     var senhaVar = isenha.value;
     var confirmacaoSenhaVar = iconfirmacao.value;
-    var idEmpresaVincular
 
     // Verificando se há algum campo em branco
     if (
@@ -150,17 +149,17 @@ function verSenha() {
     }
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
-    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
-    }
+    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
+    //     console.log("Código de ativação válido.");
+    //     break;
+    //   } else {
+    //     cardErro.style.display = "block";
+    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+    //     finalizarAguardar();
+    //   }
+    // }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -177,8 +176,7 @@ function verSenha() {
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        cpfServer: cpfVar,
-        idEmpresaVincularServer: idEmpresaVincular
+        cpfServer: cpfVar
       }),
     })
       .then(function (resposta) {
@@ -228,6 +226,6 @@ function verSenha() {
       });
   }
 
-  // function sumirMensagem() {
-  //   cardErro.style.display = "none";
-  // }
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
