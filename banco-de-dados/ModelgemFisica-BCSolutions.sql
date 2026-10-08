@@ -1,5 +1,7 @@
 create database BlueCheeseSol;
 
+drop database BlueCheeseSol;
+
 use BlueCheeseSol;
 create user 'usuario_insert '@'localhost' identified by 'QueijoAzul100';
 
@@ -15,15 +17,17 @@ create table empresa (
 idEmpresa int primary key auto_increment,
 nomeFantasia varchar(50),
 cnpj varchar(25),
-responsavelLocal varchar(50),
 fkCliente int not null,
 	constraint fkEmpresa_cliente foreign key (fkCliente) references cliente(idCliente)
 );
 
-insert into empresa (nomeFantasia, cnpj, responsavelLocal, fkCliente) values
-('Queijaria Serra Azul', '12.345.678/0001-90', 'Marcos Almeida', 1),
-('Laticínios Vale Verde', '23.456.789/0001-01', 'Carlos Pereira', 2),
-('Fazenda Azul Gourmet', '34.567.890/0001-12', 'Juliana Prado', 3);
+select * from cliente;
+insert into empresa (nomeFantasia, cnpj, fkCliente) values
+('Queijaria Serra Azul', '12.345.678/0001-90', 1),
+('Laticínios Vale Verde', '23.456.789/0001-01', 2),
+('Fazenda Azul Gourmet', '34.567.890/0001-12', 3);
+
+select * from cliente;
 
 create table endereco (
 idEndereco int primary key auto_increment,
@@ -75,7 +79,7 @@ insert into ambienteProcesso (nomePrincipal, nomeAuxiliar, descricao, temperatur
 ('Câmara de Maturação 3', 'Câmara C', 'Salga dos queijos azuis', 10.00, 14.00, 75, 85, 3);
 
 create table usuario (
-idUsuario int primary key auto_increment,
+idUsuario int auto_increment,
 login varchar(45),
 senha varchar(45),
 fkCliente int not null,
