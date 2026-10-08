@@ -1,4 +1,3 @@
-// Interface demonstrativa: dados salvos localmente neste navegador.
 const STORAGE_KEY = "bluecheese_meus_locais_v1";
 const initialData = [
   {
