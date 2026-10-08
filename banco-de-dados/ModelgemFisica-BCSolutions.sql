@@ -61,6 +61,7 @@ insert into cliente (nome, cpf, email, numeroCelular, fkEmpresa, fkSupervisor, f
 ('Fernanda Souza', '234.567.890-12', 'fernanda.souza@veiaazul.com.br', '34991234567', 2, 1, null),
 ('Ricardo Teixeira', '345.678.901-23', 'ricardo.teixeira@gorgonzolamineira.com.br', '35998765432', 3, 1, null);
 
+select * from cliente;
 create table ambienteProcesso (
 idAmbienteProcesso int primary key auto_increment,
 nomePrincipal varchar(45),
@@ -79,7 +80,6 @@ create table usuario (
 idUsuario int primary key auto_increment,
 login varchar(45),
 senha varchar(45)
-
 );
 
 insert into usuario (login, senha) values
