@@ -1,46 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Acessos | Blue Cheese</title>
+  <link rel="shortcut icon" href="./assets/LogoBlueCheese.png" type="image/x-icon">
   <link rel="stylesheet" href="./style.css">
-  <script src="./js/acessos.js" defer></script>
 </head>
-<body class="dashboard-page acessos-page">
-  <aside class="dashboard-sidebar" id="sidebar">
-    <a class="sidebar-brand" href="./index.html" aria-label="Blue Cheese - página inicial"><img src="./assets/LogoBlueCheese.png" alt="Blue Cheese"></a>
-    <nav class="sidebar-nav" aria-label="Navegação principal">
+<body>
+
+  <!-- Menu lateral -->
+  <div class="dashboard-sidebar">
+    <a class="sidebar-brand" href="./index.html">
+      <img src="./assets/LogoBlueCheese.png" alt="Blue Cheese">
+    </a>
+    <div class="sidebar-nav">
       <a href="./dashboard.html">Dashboard</a>
       <a href="./meus-locais.html">Meus locais</a>
-      <a href="./acessos.html" class="active" aria-current="page">Acessos</a>
-    </nav>
-    <div class="sidebar-account"><div class="sidebar-user"><span class="sidebar-avatar">MA</span><strong>Marcos Almeida</strong></div><a href="./index.html">Sair</a></div>
-  </aside>
-  <main class="acessos-main" id="conteudo">
-    <div class="acessos-inner">
-      <header class="acessos-header">
-        <div class="acessos-heading"><button class="menu-sidebar-toggle" id="menuToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Abrir menu">☰</button><h1>Acessos</h1></div>
-        <button type="button" class="acessos-btn primary" id="novoLogin">+ Novo login</button>
-      </header>
-      <section class="acessos-lista" aria-label="Logins cadastrados" id="listaLogins"></section>
+      <a href="./acessos.html" class="active">Acessos</a>
     </div>
-  </main>
-  <dialog id="acessosDialog" class="acessos-dialog" aria-labelledby="acessosDialogTitle">
-    <form id="acessosForm" autocomplete="off">
-      <div class="acessos-dialog-header"><h2 id="acessosDialogTitle">Novo login</h2><button type="button" id="fecharAcessos" class="acessos-x" aria-label="Fechar janela">×</button></div>
-      <label class="acessos-field">Login<input id="campoLogin" name="login" placeholder="sala.maturacao" maxlength="60" required autocomplete="off"></label>
-      <div class="acessos-input-row">
-        <label class="acessos-field"><span id="senhaLabel">Senha</span><input id="campoSenha" name="senha" type="password" minlength="8" placeholder="••••••••" autocomplete="new-password"></label>
-        <label class="acessos-field">Confirmar senha<input id="confirmarSenha" name="confirmarSenha" type="password" minlength="8" placeholder="••••••••" autocomplete="new-password"></label>
+    <div class="sidebar-account">
+      <div class="sidebar-user"><span class="sidebar-avatar">MA</span> Marcos Almeida</div>
+      <a href="./index.html">Sair</a>
+    </div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="locais">
+    <div class="locais-header">
+      <h1>Acessos</h1>
+      <button class="btn-azul" onclick="abrirNovoLogin()">+ Novo login</button>
+    </div>
+
+    <!-- Lista de logins -->
+    <div class="acessos-lista">
+      <div class="acesso">
+        <span class="acesso-avatar">M</span>
+        <b>marcos.almeida</b>
+        <span class="acesso-voce">Você</span>
+        <button class="btn-link" onclick="abrirEditarLogin('marcos.almeida')">Editar</button>
       </div>
-      <p class="acessos-help" id="senhaHelp" hidden>Deixe a senha em branco para manter a atual.</p>
-      <p class="acessos-error" id="erroAcessos" role="alert" hidden></p>
-      <div class="acessos-dialog-footer">
-        <button type="button" class="acessos-excluir" id="excluirLogin" hidden>Excluir login</button>
-        <div class="acessos-footer-actions"><button type="button" class="acessos-btn secondary" id="cancelarAcessos">Cancelar</button><button type="submit" class="acessos-btn primary" id="salvarLogin">Criar login</button></div>
+      <div class="acesso">
+        <span class="acesso-avatar">S</span>
+        <b>sala.maturacao</b>
+        <button class="btn-link" onclick="abrirEditarLogin('sala.maturacao')">Editar</button>
       </div>
-    </form>
-  </dialog>
+      <div class="acesso">
+        <span class="acesso-avatar">Q</span>
+        <b>qualidade.serra</b>
+        <button class="btn-link" onclick="abrirEditarLogin('qualidade.serra')">Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Novo login -->
+  <div class="popup-fundo" id="popup_novo_login">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Novo login</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <p class="popup-label">Login</p>
+      <input class="popup-input" id="input_login_novo" placeholder="sala.maturacao">
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Senha</p>
+          <input class="popup-input" id="input_senha_novo" type="password" placeholder="••••••••">
+        </div>
+        <div>
+          <p class="popup-label">Confirmar senha</p>
+          <input class="popup-input" id="input_confirmar_novo" type="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <div class="popup-msg" id="div_msg_novo"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="criarLogin()">Criar login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop-up: Editar login -->
+  <div class="popup-fundo" id="popup_editar_login">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Editar login</h2>
+        <button class="popup-fechar" onclick="fecharPopups()">✕</button>
+      </div>
+
+      <p class="popup-label">Login</p>
+      <input class="popup-input" id="input_login_editar">
+
+      <div class="linha">
+        <div>
+          <p class="popup-label">Nova senha</p>
+          <input class="popup-input" id="input_senha_editar" type="password" placeholder="••••••••">
+        </div>
+        <div>
+          <p class="popup-label">Confirmar senha</p>
+          <input class="popup-input" id="input_confirmar_editar" type="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <p class="acesso-ajuda">Deixe a senha em branco para manter a atual.</p>
+      <div class="popup-msg" id="div_msg_editar"></div>
+
+      <div class="popup-botoes">
+        <button class="btn-vermelho" id="btn_excluir" onclick="fecharPopups()">Excluir login</button>
+        <button class="btn-branco" onclick="fecharPopups()">Cancelar</button>
+        <button class="btn-azul" onclick="salvarLogin()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/acessos.js"></script>
 </body>
 </html>

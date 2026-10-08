@@ -1241,45 +1241,52 @@ footer {
   margin-right: 0;
 }
 
-/* ====================================================
-   ACESSOS — estilos próprios, sem afetar outras páginas
-   ==================================================== */
-.acessos-page { height:auto; min-height:100vh; overflow-x:hidden; overflow-y:auto; }
-.acessos-page .acessos-main { margin-left:210px; min-height:100vh; padding:40px 40px 60px; }
-.acessos-inner { width:min(100%, 1030px); }
-.acessos-header { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:32px; }
-.acessos-heading { display:flex; align-items:center; gap:12px; }
-.acessos-heading h1 { margin:0; font:400 36px/1.2 var(--serif); color:#193553; }
-.acessos-btn { display:inline-flex; justify-content:center; align-items:center; min-height:37px; padding:10px 19px; border-radius:25px; font:700 12px/1 Inter,"Segoe UI",sans-serif; cursor:pointer; white-space:nowrap; transition:background .15s ease; }
-.acessos-btn.primary { background:var(--sidebar); border:1px solid var(--sidebar); color:white; }
-.acessos-btn.primary:hover { background:#0f325f; }
-.acessos-btn.secondary { background:white; border:1px solid var(--sidebar); color:var(--sidebar); }
-.acessos-btn.secondary:hover { background:#eef4fc; }
-.acessos-lista { width:min(100%, 570px); background:white; border:1px solid #e5ded2; border-radius:17px; padding:6px 22px; box-shadow:0 5px 13px rgba(30,44,61,.07); }
-.acessos-item { display:flex; align-items:center; min-height:61px; gap:13px; border-bottom:1px solid #e8dfd5; }
-.acessos-item:last-child { border-bottom:none; }
-.acessos-avatar { display:grid; place-items:center; flex:0 0 32px; width:32px; height:32px; border-radius:50%; background:#ddca45; color:#123d72; font-size:12px; font-weight:800; }
-.acessos-nome { color:#123d72; font-size:13px; font-weight:750; overflow-wrap:anywhere; min-width:0; }
-.acessos-voce { background:#f4f0e9; padding:5px 11px; border-radius:18px; font-size:10px; font-weight:700; color:#173f73; }
-.acessos-editar { margin-left:auto; background:transparent; border:0; color:#376ca5; font:700 11px Inter,"Segoe UI",sans-serif; cursor:pointer; padding:8px 0 8px 10px; }
-.acessos-editar:hover { text-decoration:underline; }
-.acessos-vazio { margin:16px 0; font-size:13px; color:#6b8095; }
-.acessos-dialog { width:min(464px,calc(100vw - 32px)); max-height:calc(100dvh - 24px); padding:0; border:0; border-radius:20px; color:#173553; background:white; box-shadow:0 20px 50px #1024392b; }
-.acessos-dialog::backdrop { background:rgba(14,30,51,.55); }
-.acessos-dialog form { padding:27px 25px 24px; }
-.acessos-dialog-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:22px; }
-.acessos-dialog-header h2 { margin:0; font:400 24px var(--serif); color:#183653; }
-.acessos-x { background:none; border:0; color:#6d849c; font-size:25px; cursor:pointer; padding:0 2px; line-height:1; }
-.acessos-field { display:flex; flex-direction:column; gap:7px; min-width:0; font-size:12px; font-weight:700; color:#153553; }
-.acessos-field input { width:100%; min-width:0; min-height:40px; padding:10px 13px; border:1px solid #e4dace; border-radius:9px; background:#faf7f2; color:#213d5a; font:400 13px Inter,"Segoe UI",sans-serif; outline:none; }
-.acessos-field input:focus { border-color:#759abf; box-shadow:0 0 0 2px #a5c8e944; }
-.acessos-input-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; margin-top:15px; }
-.acessos-help { color:#73859a; font-size:11px; margin:8px 0 0; }
-.acessos-error { color:#b83f35; margin:11px 0 0; font-size:12px; }
-.acessos-dialog-footer { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:22px; padding-top:20px; border-top:1px solid #e8dfd5; }
-.acessos-footer-actions { display:flex; align-items:center; gap:9px; margin-left:auto; }
-.acessos-excluir { border:0; background:none; color:#c8493d; cursor:pointer; font-size:11px; font-weight:700; padding:8px 0; }
-.acessos-excluir:hover { text-decoration:underline; }
-.acessos-page .menu-sidebar-toggle { display:none; }
-@media(max-width:700px) { .acessos-page .acessos-main { margin-left:0; padding:22px 16px 50px; } .acessos-page .dashboard-sidebar { z-index:100; width:230px; transform:translateX(-100%); transition:transform .25s ease; } .acessos-page .dashboard-sidebar.open { transform:translateX(0); } .acessos-page .menu-sidebar-toggle { display:block; border:0; background:none; color:var(--navy); font-size:23px; cursor:pointer; } .acessos-heading h1 { font-size:30px; } .acessos-dialog form { padding:23px 19px; } }
-@media(max-width:390px) { .acessos-input-row { grid-template-columns:1fr; } .acessos-btn { padding:10px 13px; } .acessos-lista { padding:6px 12px; } .acessos-item { gap:9px; } .acessos-nome { font-size:11px; } }
+/* ===== Acessos ===== */
+.acessos-lista {
+  width: 570px;
+  padding: 6px 22px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: white;
+  box-shadow: 0 5px 15px rgba(30, 44, 61, .07);
+}
+
+.acesso {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--navy);
+}
+
+.acesso .btn-link {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.acesso-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2c94c;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 32px;
+}
+
+.acesso-voce {
+  padding: 4px 11px;
+  border-radius: 18px;
+  background: #f4f0e9;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.acesso-ajuda {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+}
