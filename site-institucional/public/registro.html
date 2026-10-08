@@ -148,7 +148,7 @@
             div_result_cliente.innerHTML=``
         }
 
-        if(cpf.length != 11 || cnpj.includes("-") || cnpj.includes(".")) {
+        if(cpf.length != 11 || cpf.includes("-") || cpf.includes(".")) {
             div_result_cpf.innerHTML=`CPF deve ter 11 números`
             flagError = true;
         } else {
