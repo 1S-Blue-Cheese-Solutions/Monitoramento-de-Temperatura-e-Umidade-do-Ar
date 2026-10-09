@@ -1,7 +1,5 @@
 create database BlueCheeseSol;
 
-drop database BlueCheeseSol;
-
 use BlueCheeseSol;
 create user 'usuario_insert '@'localhost' identified by 'QueijoAzul100';
 
@@ -21,7 +19,6 @@ fkCliente int not null,
 	constraint fkEmpresa_cliente foreign key (fkCliente) references cliente(idCliente)
 );
 
-select * from cliente;
 insert into empresa (nomeFantasia, cnpj, fkCliente) values
 ('Queijaria Serra Azul', '12.345.678/0001-90', 1),
 ('Laticínios Vale Verde', '23.456.789/0001-01', 2),
@@ -91,7 +88,7 @@ insert into usuario (login, senha, fkCliente) values
 ('marcos.almeida', 'Senha@123', 1),
 ('fernanda.souza', 'Senha@456', 2),
 ('rafael.moreira', 'Senha@789', 3);
-
+ 
 create table sensor (
 idSensor int primary key auto_increment,
 nome varchar(45),
@@ -133,3 +130,5 @@ insert into leituraSensor (sensorUmidade, sensorTemperatura, fkSensorAmbiente, f
 (88.5, 10.2, 1, 1),
 (92.1,  8.7, 2, 2),
 (79.8, 12.4, 3, 3);
+
+select * from leituraSensor;
